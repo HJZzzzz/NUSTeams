@@ -13,6 +13,16 @@ export default [
     }
   },
   {
+    _tag: 'CSidebarNavItem',
+    name: 'UserProfile',
+    to: '/profile',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']
   },
