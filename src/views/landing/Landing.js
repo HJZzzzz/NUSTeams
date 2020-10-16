@@ -9,9 +9,6 @@ import {
     CForm,
     CInput,
     CButton,
-    CDropdown,
-    CDropdownToggle,
-    CDropdownMenu,
     CCard,
     CRow,
     CCol,
@@ -20,7 +17,7 @@ import {
     CToastBody,
     CToastHeader,
     CToaster,
-    CDropdownItem, CCardBody, CContainer, CFormGroup
+    CCardBody, CContainer, CFormGroup
 } from '@coreui/react'
 
 import styled from 'styled-components';
@@ -31,6 +28,8 @@ import portfolioImage from '../../assets/images/resume.png';
 import networkImage from '../../assets/images/network.png';
 import statsImage from '../../assets/images/stats.gif';
 import contactImage from '../../assets/images/contact.gif';
+
+import { useHistory } from 'react-router-dom';
 
 const BannerContainer = styled.div`
     margin-left: 10vw;
@@ -115,33 +114,34 @@ const ContactformContainer = styled.div`
 `;
 
 const Landing = () => {
-    const positions = [
-        'top-left',
-        'top-center',
-        'top-right',
-        'top-full',
-        'bottom-left',
-        'bottom-center',
-        'bottom-right',
-        'bottom-full'
-    ]
+    // const positions = [
+    //     'top-left',
+    //     'top-center',
+    //     'top-right',
+    //     'top-full',
+    //     'bottom-left',
+    //     'bottom-center',
+    //     'bottom-right',
+    //     'bottom-full'
+    // ]
 
     const [toasts, setToasts] = useState([
     ])
 
-    const [position, setPosition] = useState('top-right')
-    const [autohide, setAutohide] = useState(true)
-    const [autohideValue, setAutohideValue] = useState(5000)
-    const [closeButton, setCloseButton] = useState(true)
-    const [fade, setFade] = useState(true)
-
+    const [position] = useState('top-right')
+    const [autohide] = useState(true)
+    const [autohideValue] = useState(5000)
+    const [closeButton] = useState(true)
+    const [fade] = useState(true)
     const [isOpen, setIsOpen] = useState(false);
+
     const addToast = () => {
         setToasts([
             ...toasts,
             { position, autohide: autohide && autohideValue, closeButton, fade }
         ])
     }
+
     const toasters = (() => {
         return toasts.reduce((toasters, toast) => {
             toasters[toast.position] = toasters[toast.position] || []
@@ -149,6 +149,12 @@ const Landing = () => {
             return toasters
         }, {})
     })()
+
+    const history = useHistory()
+
+    const pageChange = () => {
+        history.push(`/login`)
+    }
 
     return (
         <Fragment>
@@ -167,32 +173,6 @@ const Landing = () => {
                                 <CNavLink>Login</CNavLink>
                                 <CNavLink>About</CNavLink>
                             </CNavbarNav>
-                            {/* <CNavbarNav className="ml-auto">
-                                <CDropdown
-                                    inNav
-                                >
-                                    <CDropdownToggle color="primary">
-                                        Lang
-                                </CDropdownToggle>
-                                    <CDropdownMenu>
-                                        <CDropdownItem>EN</CDropdownItem>
-                                        <CDropdownItem>ES</CDropdownItem>
-                                        <CDropdownItem>RU</CDropdownItem>
-                                        <CDropdownItem>FA</CDropdownItem>
-                                    </CDropdownMenu>
-                                </CDropdown>
-                                <CDropdown
-                                    inNav
-                                >
-                                    <CDropdownToggle color="primary">
-                                        User
-                                </CDropdownToggle>
-                                    <CDropdownMenu>
-                                        <CDropdownItem>Account</CDropdownItem>
-                                        <CDropdownItem>Settings</CDropdownItem>
-                                    </CDropdownMenu>
-                                </CDropdown>
-                            </CNavbarNav> */}
                         </CCollapse>
                     </CNavbar>
                 </div>
@@ -211,7 +191,7 @@ const Landing = () => {
                             <BannerRight>
                                 <h1>Welcome to NUSTeams</h1>
                                 <h4>Your One-Stop Collaboration Platform</h4>
-                                <CButton color={'primary'} style={{ marginTop: 5 }}>Get Started</CButton>
+                                <CButton color={'primary'} style={{ marginTop: 5 }} onClick={pageChange}>Get Started</CButton>
                             </BannerRight>
 
                         </div>
