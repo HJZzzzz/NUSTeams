@@ -14,8 +14,8 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'UserProfile',
-    to: '/profile',
+    name: 'Proj Details',
+    to: '/project/:123',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',

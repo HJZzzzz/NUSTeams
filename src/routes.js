@@ -38,6 +38,7 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const ProjectDetails = React.lazy(() => import('./views/project/project-details/ProjectDetails'));
 // const Landing = React.lazy(() => import('./views/landing/Landing'));
 
 const routes = [
@@ -80,8 +81,9 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true, name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/project/:id', exact: true, name: 'Project Details',component: ProjectDetails}
 ];
 
 export default routes;
