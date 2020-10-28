@@ -10,106 +10,126 @@ import {
   CCol,
   CProgress,
   CRow,
-  CCallout
+  CCallout,
+  CImg,
+  CDataTable
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import usersData from '../users/UsersData'
 import MainChartExample from '../charts/MainChartExample.js'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
+const ongoingProjects = [
+  { id: 1, name: 'CS3240 Design Project', projectType: 'Module Project', projectIdentifier: 'CS3240', vacancy: '4/5', status: 'OPEN' },
+  { id: 2, name: 'NOC Startup. We are recruiting!', projectType: 'Public Project', projectIdentifier: 'Tech', vacancy: '5/5', status: 'ONGOING' },
+  { id: 3, name: 'IS4103 Capstone Project', projectType: 'Module Project', projectIdentifier: 'IS4103', vacancy: '4/4', status: 'ONGOING' },
+  { id: 4, name: 'IS3106 Front end development', projectType: 'Module Project', projectIdentifier: 'IS3106', vacancy: '4/5', status: 'OPEN' },
+]
+
+const inbox = [
+  { id: 1, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Tom Cruise has invited you to join his project: IS4103 Capstone Project' },
+  { id: 2, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'Matt Damon has invited you to join his project: CS3240 Design Project' },
+  { id: 3, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Sam Smith has invited you to join his project: IS3106 Final Project' },
+]
+
+const getBadge = status => {
+  switch (status) {
+    case 'OPEN': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'ONGOING': return 'warning'
+    case 'CLOSED': return 'danger'
+    default: return 'primary'
+  }
+}
+const fields = ['name', 'projectType', 'projectIdentifier', 'vacancy', 'status']
+const inboxFields = ['user', 'name', 'message', 'actions']
 const Dashboard = () => {
   return (
     <>
       <WidgetsDropdown />
       <CCard>
-        <CCardBody>
+        <CCardHeader>
           <CRow>
-            <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Traffic</h4>
-              <div className="small text-muted">November 2017</div>
+            <CCol col="11" sm="8" md="8" xl="10">
+              <b>Ongoing projects</b>
+
             </CCol>
-            <CCol sm="7" className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download"/>
-              </CButton>
-              <CButtonGroup className="float-right mr-3">
-                {
-                  ['Day', 'Month', 'Year'].map(value => (
-                    <CButton
-                      color="outline-secondary"
-                      key={value}
-                      className="mx-0"
-                      active={value === 'Month'}
-                    >
-                      {value}
-                    </CButton>
-                  ))
-                }
-              </CButtonGroup>
+            <CCol col="1" sm="4" md="4" xl="2">
+              <CButton block color="info">Create New Project</CButton>
+
             </CCol>
           </CRow>
-          <MainChartExample style={{height: '300px', marginTop: '40px'}}/>
+        </CCardHeader>
+        <CCardBody>
+          <CDataTable
+            items={ongoingProjects}
+            fields={fields}
+            striped
+            itemsPerPage={5}
+            pagination
+            scopedSlots={{
+              'status':
+                (item) => (
+                  <td>
+                    <CBadge color={getBadge(item.status)}>
+                      {item.status}
+                    </CBadge>
+                  </td>
+                )
+
+            }}
+          />
         </CCardBody>
-        <CCardFooter>
-          <CRow className="text-center">
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Visits</div>
-              <strong>29.703 Users (40%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="success"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Unique</div>
-              <strong>24.093 Users (20%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="info"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Pageviews</div>
-              <strong>78.706 Views (60%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="warning"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">New Users</div>
-              <strong>22.123 Users (80%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="danger"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Bounce Rate</div>
-              <strong>Average Rate (40.15%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                value={40}
-              />
-            </CCol>
-          </CRow>
-        </CCardFooter>
       </CCard>
 
-      <WidgetsBrand withCharts/>
+      <CCard>
+        <CCardHeader>
+          <b>Inbox</b>
+        </CCardHeader>
+        <CCardBody>
+          <CDataTable
+            items={inbox}
+            fields={inboxFields}
+            striped
+            itemsPerPage={5}
+            pagination
+            scopedSlots={{
+              'user':
+                (item) => (
+                  <td className="text-center">
+                    <div className="c-avatar">
+                      <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                      <span className="c-avatar-status bg-danger"></span>
+                    </div>
+                  </td>
+                ),
+              'actions':
+                (item) => (
+                  <td>
+                    <CRow>
+                      <CCol sm="12" md="12" l="4" xl="4">
+                        <CButton block color="info">View Project</CButton>
+                      </CCol>
+                      <CCol sm="12" md="12" l="4" xl="4">
+                        <CButton block color="success">Accept</CButton>
+                      </CCol>
+                      <CCol sm="12" md="12" l="4" xl="4">
+                        <CButton block color="danger">Reject</CButton>
+                      </CCol>
+                    </CRow>
+                  </td>
 
-      <CRow>
+                )
+            }}
+          />
+        </CCardBody>
+      </CCard>
+
+      {/* <WidgetsBrand withCharts /> */}
+
+      {/* <CRow>
         <CCol>
           <CCard>
             <CCardHeader>
@@ -152,7 +172,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Tuesday
+                        Tuesday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -163,7 +183,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Wednesday
+                        Wednesday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -174,7 +194,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Thursday
+                        Thursday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -185,7 +205,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Friday
+                        Friday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -196,7 +216,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Saturday
+                        Saturday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -207,7 +227,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Sunday
+                        Sunday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -501,7 +521,7 @@ const Dashboard = () => {
                       <CProgress className="progress-xs" color="info" value="22" />
                     </td>
                     <td className="text-center">
-                      <CIcon height={25} name="cib-google-pay"/>
+                      <CIcon height={25} name="cib-google-pay" />
                     </td>
                     <td>
                       <div className="small text-muted">Last login</div>
@@ -549,7 +569,7 @@ const Dashboard = () => {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
+      </CRow> */}
     </>
   )
 }
