@@ -26,6 +26,7 @@ const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/Butt
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
 const Charts = React.lazy(() => import('./views/charts/Charts'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
+const UserProfile = React.lazy(() => import('./views/profile/UserProfile'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
 const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
@@ -37,11 +38,13 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const ProjectDetails = React.lazy(() => import('./views/project/project-details/ProjectDetails'));
 // const Landing = React.lazy(() => import('./views/landing/Landing'));
 
 const routes = [
   // { path: '/', exact: true, name: 'Home', component: Landing },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/profile', name: 'UserProfile', component: UserProfile },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -78,8 +81,9 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true, name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/project/:id', exact: true, name: 'Project Details',component: ProjectDetails}
 ];
 
 export default routes;

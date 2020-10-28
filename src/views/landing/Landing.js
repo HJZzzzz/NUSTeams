@@ -141,7 +141,6 @@ const Landing = () => {
             { position, autohide: autohide && autohideValue, closeButton, fade }
         ])
     }
-
     const toasters = (() => {
         return toasts.reduce((toasters, toast) => {
             toasters[toast.position] = toasters[toast.position] || []
