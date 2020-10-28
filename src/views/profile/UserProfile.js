@@ -16,9 +16,15 @@ import {
   CProgressBar,
   CCollapse,
   CWidgetProgress,
+  CWidgetBrand,
   CWidgetIcon,
   CWidgetProgressIcon,
-  CWidgetSimple
+  CWidgetSimple,
+  CForm,
+  CFormGroup,
+  CInput,
+  CLabel,
+  CDataTable,
 } from '@coreui/react'
 import {
   CChartBar,
@@ -30,8 +36,21 @@ import {
 } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
+import ChartLineSimple from '../charts/ChartLineSimple'
 // import "@coreui/coreui/css/custom"
+import usersData from './projectData'
 
+const fields = ['img', 'project_name','description', 'Module_Project', 'registered',  'status']
+
+const getBadge = status => {
+  switch (status) {
+    case 'completed': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'Pending': return 'warning'
+    case 'Banned': return 'danger'
+    default: return 'primary'
+  }
+}
 const UserProfile = () => {
   const [collapse, setCollapse] = useState(false)
   const [collapseMulti, setCollapseMulti] = useState([false, false])
@@ -66,105 +85,95 @@ const UserProfile = () => {
   }
   return (
     <>
-        <CRow>
-          <CCol>
-          <div class="profile-main">
-            <div class="profile-header">
-              <div class="user-detail">
-                <div class="user-image">
-                  <img src="http://nicesnippets.com/demo/up-profile.jpg"></img>
-                </div>
-                <div class="user-data">
-                  <br></br>
-                  <h2>&nbsp; &nbsp; Smith Alexander</h2>
-                  <br></br>
-                  <p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>Year 4 Information Systems Student at NUS</strong></p>
-                    <p>
-                      &nbsp; &nbsp; &nbsp; &nbsp;
-                      <CButton className="btn-facebook btn-brand mr-1 mb-1"><CIcon name="cib-facebook" /></CButton>
-                      <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cib-linkedin" /></CButton>
-                      <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cib-github" /></CButton>
-                      <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cil-envelope-closed" /></CButton>
-                      <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cil-phone" /></CButton>
-                    </p>
-                </div>
-              </div>
-            </div>
-          </div>  
+      <CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader>
+              <h4>About Me  
+                <CIcon width={24} className="float-right" name="cil-pencil"/> 
+              </h4>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                <CCol xs="12" sm="6" lg="3">
+                  <div class="profile-main">
+                    <div class="profile-header">
+                      <div class="user-detail">
+                        <div class="user-image">
+                          <img src="http://nicesnippets.com/demo/up-profile.jpg"></img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="clearfix">
+                      <div className="float-left">
+                        <CBadge color="success" className="float-middle">WELL-LOVED</CBadge> 
+                      </div>
+                      <div className="float-right">
+                        <small className="text-muted">4.0/4.0</small>
+
+                      </div>
+                    </div>
+                    <CProgress
+                      className="progress-xs mt-2"
+                      precision={1}
+                      color="success"
+                      value={100}
+                    />
+                </CCol>
+                <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                  <CForm action="" method="post" className="form-horizontal">
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Name</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Jones Ferdinand</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Major & Year</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Computer Science, Year 4</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Bio</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Hello, I am a Year 4 student who is interested in product design, PM me for collab!</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Contact</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <CButton className="btn-facebook btn-brand mr-1 mb-1"><CIcon name="cib-facebook" /></CButton>
+                        <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cib-linkedin" /></CButton>
+                        <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cib-github" /></CButton>
+                        <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cil-envelope-closed" /></CButton>
+                        <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cil-phone" /></CButton>
+                      </CCol>
+                    </CFormGroup>
+                  </CForm>                  
+                </CCol>
+              </CRow>
+            </CCardBody>
+          </CCard>
         </CCol>
-        </CRow>
-
-    <CRow>
-      <CCol>
-      <CCard>
-        <CCardHeader>
-          <h4>About</h4>
-        </CCardHeader>
-        <CCardBody>
-          I am a Year 4 NUS Information Systems student, I am passionate in drawing insights from data and turning them into solutions, strategies and business values. I have experience with real world big data including RNA expression data, e-commerce business data and enterprise operational data. I am familiar with ETL process and CRISP DM. I also have a journal published on Frontiers in Genetics about a bio-informatics tool I built for gene expression data analysis. Area of focus: Data Science, Machine Learning, Business Intelligence.
-          Competencies: Data Science, Machine Learning, Data Visualisation, Database Management, High-Dimensional Statistical Analysis, Python, R, R shiny, SQL, NoSQL, Matlab
-        </CCardBody>
-      </CCard>
-    </CCol>
-    </CRow>
-
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader>
-            <h4>User Ranking</h4>
-          </CCardHeader>
-          <CCardBody>
-            <div className="progress-group">
-              <div className="progress-group-header">
-                <span className="title">Communication Skills</span>
-                <span className="ml-auto font-weight-bold">4.5 <span className="text-muted small">(3 teammates voted)</span></span>
-              </div>
-              <div className="progress-group-bars">
-                <CProgress className="progress-xs" color="info" value="80" />
-              </div>
-            </div>
-            <div className="progress-group">
-              <div className="progress-group-header">
-                <span className="title">Technical Skills</span>
-                  <span className="ml-auto font-weight-bold">4.8 <span className="text-muted small">(3 teammates voted)</span>
-                </span>
-              </div>
-              <div className="progress-group-bars">
-                <CProgress className="progress-xs" color="info" value="90" />
-              </div>
-            </div>
-                  <div className="progress-group">
-                    <div className="progress-group-header">
-                      <span className="title">Leadership</span>
-                      <span className="ml-auto font-weight-bold">4.9 <span className="text-muted small">(3 teammates voted)</span></span>
-                    </div>
-                    <div className="progress-group-bars">
-                      <CProgress className="progress-xs" color="info" value="96" />
-                    </div>
-                  </div>
-                  
-                  <div className="progress-group">
-                    <div className="progress-group-header">
-                      <span className="title">Punctuality</span>
-                      <span className="ml-auto font-weight-bold">5.0 <span className="text-muted small">(3 teammates voted)</span></span>
-                    </div>
-                    <div className="progress-group-bars">
-                      <CProgress className="progress-xs" color="info" value="100" />
-                    </div>
-                  </div>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader>
-            <h4>Skills</h4>
-          </CCardHeader>
-          <CCardBody>
-            <div id="accordion">
+        <CCol xs="12" xl="6">
+          <CCard>
+            <CCardHeader>
+              <h4>Skills
+                <CIcon width={24} className="float-right" name="cil-pencil"/> 
+              </h4>
+            </CCardHeader>
+            <CCardBody>
+              <div id="accordion">
               <CCard className="mb-0">
                 <CCardHeader id="headingOne">
                   <CButton 
@@ -179,25 +188,15 @@ const UserProfile = () => {
                   <CCardBody>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Ruichun" header="Java" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Ruichun and 10 others" header="Java" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon header="JavaScript" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Shengjing and 10 others"header="JavaScript" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="Python" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="C" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
+                      </CCol>                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
@@ -216,40 +215,12 @@ const UserProfile = () => {
                   <CCardBody>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Bryan" header="Communication" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Bryan and 10 others" header="Communication" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon header="Leadership" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      
-                    </CRow>
-                  </CCardBody>
-                </CCollapse>
-              </CCard>
-              <CCard className="mb-0">
-                <CCardHeader id="headingThree">
-                  <CButton 
-                    block 
-                    className="text-left m-0 p-0" 
-                    onClick={() => setAccordion(accordion === 2 ? null : 2)}
-                  >
-                    <span className="title">Languages</span>
-                  </CButton>
-                </CCardHeader>
-                <CCollapse show={accordion === 2}>
-                  <CCardBody>
-                    <CRow>
-                      <CCol>
-                        <CWidgetIcon header="English" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="Spanish" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
@@ -281,17 +252,15 @@ const UserProfile = () => {
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
-                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
               </CCard>
             </div>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
     <CRow>
       <CCol>
       <CCard>
