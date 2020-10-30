@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom'
 import {
   CBadge,
   CCardBody,
@@ -207,18 +208,6 @@ const ViewUsers = () => {
   ];
 
   const [details, setDetails] = useState([]);
-  // const [items, setItems] = useState(usersData)
-
-  // const toggleDetails = (index) => {
-  //   const position = details.indexOf(index);
-  //   let newDetails = details.slice();
-  //   if (position !== -1) {
-  //     newDetails.splice(position, 1);
-  //   } else {
-  //     newDetails = [...details, index];
-  //   }
-  //   setDetails(newDetails);
-  // };
 
   const fields = [
     {
@@ -238,6 +227,12 @@ const ViewUsers = () => {
       filter: false,
     },
   ];
+
+  const history = useHistory()
+
+  const pageChange = () => {
+    history.push(`/user-portfolio`)
+  }
 
   return (
     <CCard>
@@ -265,7 +260,7 @@ const ViewUsers = () => {
             'action': (item) => {
               return (
                 <td className="py-2">
-                  <CButton size="sm" color="info" onClick={() => { }}>VIEW PROFILE</CButton>     
+                  <CButton size="sm" color="info" onClick={pageChange}>VIEW PROFILE</CButton>     
                 </td>
               );
             },

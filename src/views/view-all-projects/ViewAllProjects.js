@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom'
 import {
   CBadge,
   CCardBody,
@@ -223,6 +224,12 @@ const ViewAllProject = () => {
     }
   };
 
+  const history = useHistory()
+
+  const pageChange = () => {
+    history.push(`/project/project-details`)
+  }
+
   return (
     <CCard>
       <CCardBody>
@@ -245,7 +252,7 @@ const ViewAllProject = () => {
             'action': (item) => {
               return (
                 <td className="py-2">
-                  <CButton size="sm" color="info" onClick={() => { }}>VIEW DETAILS</CButton>     
+                  <CButton size="sm" color="info" onClick={pageChange}>VIEW DETAILS</CButton>     
                 </td>
               );
             },
