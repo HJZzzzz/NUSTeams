@@ -46,7 +46,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'User Profile',
     to: '/profile',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     badge: {
       color: 'info',
       text: 'NEW',
@@ -56,11 +56,17 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'My Proj Details',
     to: '/my_project/:123',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     badge: {
       color: 'info',
       text: 'NEW',
     }
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'View My Projects',
+    to: '/view-my-projects',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
   },
   {
     _tag: 'CSidebarNavTitle',
