@@ -44,6 +44,7 @@ const MyProjectDetails = React.lazy(() => import('./views/project/my-project-det
 const ViewAllProjects = React.lazy(() => import("./views/view-all-projects/ViewAllProjects"));
 const ViewUsers = React.lazy(() => import("./views/view-users/ViewUsers"));
 const UserPortfolio = React.lazy(() => import('./views/user-portfolio/UserPortfolio'));
+const ViewMyProjects = React.lazy(() => import('./views/view-my-project/ViewMyProjects'));
 
 const routes = [
   // { path: '/', exact: true, name: 'Home', component: Landing },
@@ -85,13 +86,14 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/project/:id', exact: true, name: 'Project Details',component: ProjectDetails},
-  { path: '/my_project/:id', exact: true, name: 'My Project Details',component: MyProjectDetails},
+  { path: '/project/:id', exact: true, name: 'Project Details', component: ProjectDetails },
+  { path: '/my_project/:id', exact: true, name: 'My Project Details', component: MyProjectDetails },
   { path: "/view-all-projects", exact: true, name: "View All Projects", component: ViewAllProjects },
   { path: "/view-users", exact: true, name: "View Users", component: ViewUsers },
   { path: '/user-portfolio', name: 'User Portfolio', component: UserPortfolio },
+  { path: '/view-my-projects', name: 'View My Projects', component: ViewMyProjects },
 ];
 
 export default routes;
