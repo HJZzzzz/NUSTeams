@@ -2,57 +2,34 @@ import React, { lazy, useState } from 'react'
 import {
   CBadge,
   CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CListGroup,
   CListGroupItem,
   CCol,
   CProgress,
   CRow,
-  CCallout,
-  CProgressBar,
   CCollapse,
-  CWidgetProgress,
-  CWidgetBrand,
   CWidgetIcon,
-  CWidgetProgressIcon,
-  CWidgetSimple,
   CForm,
   CFormGroup,
-  CInput,
   CLabel,
-  CDataTable,
   CModal,
   CModalBody,
   CModalFooter,
   CModalHeader,
   CModalTitle,
   CSelect,
-  CFormText,
   CTextarea,
-  CSwitch,
   CToast,
   CToastBody,
   CToastHeader,
   CToaster,
-  CInputCheckbox,
-  CAlert,
   CInputRadio
 } from '@coreui/react'
-import {
-  CChartBar,
-  CChartLine,
-  CChartDoughnut,
-  CChartRadar,
-  CChartPie,
-  CChartPolarArea
-} from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
-import ChartLineSimple from '../charts/ChartLineSimple'
+
 // import "@coreui/coreui/css/custom"
 
 // import usersData from '..//projectData'
@@ -158,17 +135,6 @@ const UserPortfolio = () => {
 
   const sendInvite = () => {
     console.log('sending invitation');
-    // const newProject = {
-    //   id: counter,
-    //   name: projectTitle,
-    //   projectType: projectType,
-    //   projectIdentifier: projectIdentifier,
-    //   vacancy: '1/' + teamSize,
-    //   status: 'OPEN',
-    //   description: description
-    // }
-    // ongoingProjects.unshift(newProject);
-    // counter++;
     setInvite(!invite);
     setToastMessage('User Invited. Please wait for a response.');
     addToast();
@@ -276,7 +242,13 @@ const UserPortfolio = () => {
                         <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cil-envelope-closed" /></CButton>
                         <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cil-phone" /></CButton>
                       </CCol>
-                      <CButton color="info" onClick={() => setInvite(!invite)}>INVITE</CButton>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                      </CCol>
+                      <CCol col="1" sm="4" md="4" xl="2">
+                        <CButton color="info" onClick={() => setInvite(!invite)}>INVITE</CButton>
+                      </CCol>
                     </CFormGroup>
                   </CForm>                  
                 </CCol>

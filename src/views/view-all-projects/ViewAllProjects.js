@@ -5,7 +5,6 @@ import {
   CCardBody,
   CDataTable,
   CButton,
-  CCollapse,
   CCard,
 } from "@coreui/react";
 //import { DocsLink } from "src/reusable";
@@ -197,11 +196,11 @@ const ViewAllProject = () => {
   };
 
   const fields = [
-    { key: "projectdetails", label: "Project Details", _style: { width: "40%" } },
+    { key: "projectdetails", label: "Project Details", _style: { width: "25%" } },
     { key: "projecttype", label:"Project Type", _style: { width: "20%" } },
     { key: "projectidentifier", label:"Project Identifier", _style: { width: "20%" } },
     { key: "vacancy", _style: { width: "10%" } },
-    { key: "status", _style: { width: "20%" } },
+    { key: "status", _style: { width: "10%" } },
     {
       key: "action",
       sorter: false,
@@ -212,13 +211,11 @@ const ViewAllProject = () => {
   const getBadge = (status) => {
     switch (status) {
       case "CLOSED":
-        return "primary";
+        return "danger";
       case "ONGOING":
         return "warning";
       case "OPEN":
         return "success";
-      // case "Looking for teammates":
-      //   return "danger";
       default:
         return "secondary";
     }
@@ -233,7 +230,7 @@ const ViewAllProject = () => {
   return (
     <CCard>
       <CCardBody>
-        <CDataTable
+        <CDataTable 
           items={projectsData}
           fields={fields}
           columnFilter

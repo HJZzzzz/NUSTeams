@@ -1,18 +1,13 @@
 import React, { lazy,Component,useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
-  CAlert,
   CBadge,
   CButton,
-  CButtonGroup,
   CTextarea,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
-  CProgress,
   CRow,
-  CCallout,
   CListGroup,
   CListGroupItem
 } from '@coreui/react'
@@ -28,9 +23,6 @@ import MainChartExample from '../../charts/MainChartExample.js'
 const WidgetsDropdown = lazy(() => import('../../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../../widgets/WidgetsBrand.js'))
 // import photo from '../../../assets/img/project.jpg'
-
-
-
 
 class ProjectDetails extends Component {
 
@@ -226,9 +218,9 @@ class ProjectDetails extends Component {
                   
                   </CCol>
                   <CCol sm='6' md='2' style={{float:"right"}}>
-                    <CButton  block color="info">
+                    {/* <CButton  block color="info">
                       + Add
-                    </CButton>
+                    </CButton> */}
                   </CCol>
                   <CCol sm='12' md="12">
                   

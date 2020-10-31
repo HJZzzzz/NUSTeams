@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -14,7 +14,6 @@ import {
   CInputGroupText,
   CRow,
   CAlert,
-  CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import homebackground from '../../../assets/images/nus-home.png';

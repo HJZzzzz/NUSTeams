@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom'
 import {
-  CBadge,
   CCardBody,
   CDataTable,
   CButton,
-  CCollapse,
   CCard,
-  CImg,
 } from "@coreui/react";
-import CIcon from '@coreui/icons-react'
 
 const ViewUsers = () => {
   const usersData = [
@@ -207,8 +203,6 @@ const ViewUsers = () => {
     },
   ];
 
-  const [details, setDetails] = useState([]);
-
   const fields = [
     {
       key:"pic",
@@ -216,13 +210,12 @@ const ViewUsers = () => {
       sorter: false,
       filter: false,
     },
-    { key: "name", _style: { width: "30%" } },
-    "rating",
-    { key: "major", _style: { width: "30%" } },
-    "year",
+    { key: "name", _style: { width: "20%" } },
+    { key: "rating",_style: { width: "15%" } },
+    { key: "major", _style: { width: "25%" } },
+    { key: "year", _style: { width: "15%" } },
     {
       key: "action",
-      _style: { width: "15%" },
       sorter: false,
       filter: false,
     },
