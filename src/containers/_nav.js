@@ -23,6 +23,16 @@ export default [
     }
   },
   {
+    _tag: 'CSidebarNavItem',
+    name: 'My Proj Details',
+    to: '/my_project/:123',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']
   },
