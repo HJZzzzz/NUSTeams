@@ -164,8 +164,12 @@ const Dashboard = () => {
 
   const history = useHistory()
 
-  const pageChange = () => {
+  const pageChangeProject = () => {
     history.push(`/project/:123`)
+  }
+
+  const pageChangeMyProject = () => {
+    history.push(`/my_project/:123`)
   }
 
   return (
@@ -221,7 +225,7 @@ const Dashboard = () => {
               'name':
                 (item) => (
                   <td>
-                    <CLink onClick={pageChange}>{item.name}</CLink>
+                    <CLink onClick={pageChangeMyProject}>{item.name}</CLink>
                   </td>
                 ),
               'status':
@@ -275,7 +279,7 @@ const Dashboard = () => {
                         <td>
                           <CRow>
                             <CCol sm="12" md="12" l="4" xl="4">
-                              <CButton block color="info" onClick={pageChange}>View Project</CButton>
+                              <CButton block color="info" onClick={pageChangeProject}>View Project</CButton>
                             </CCol>
                             <CCol sm="12" md="12" l="4" xl="4">
                               <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
