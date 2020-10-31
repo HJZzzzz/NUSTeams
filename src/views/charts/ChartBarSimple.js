@@ -14,7 +14,7 @@ const ChartBarSimple = props => {
     ...attributes
   } = props
 
-  const defaultDatasets = (()=>{
+  const defaultDatasets = (() => {
     return [
       {
         data: dataPoints,
@@ -27,7 +27,7 @@ const ChartBarSimple = props => {
     ]
   })()
 
-  const defaultOptions = (()=>{
+  const defaultOptions = (() => {
     return {
       maintainAspectRatio: false,
       legend: {
@@ -68,7 +68,7 @@ ChartBarSimple.propTypes = {
 
 ChartBarSimple.defaultProps = {
   backgroundColor: 'rgba(0,0,0,.2)',
-  dataPoints: [10, 22, 34, 46, 58, 70, 46, 23, 45, 78, 34, 12],
+  dataPoints: [3, 3, 3, 1, 3, 3],
   label: 'Sales'
 };
 

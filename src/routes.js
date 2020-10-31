@@ -26,6 +26,7 @@ const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/Butt
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
 const Charts = React.lazy(() => import('./views/charts/Charts'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
+const UserProfile = React.lazy(() => import('./views/profile/UserProfile'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
 const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
@@ -40,10 +41,14 @@ const User = React.lazy(() => import('./views/users/User'));
 const ProjectDetails = React.lazy(() => import('./views/project/project-details/ProjectDetails'));
 const MyProjectDetails = React.lazy(() => import('./views/project/my-project-details/MyProjectDetails'));
 // const Landing = React.lazy(() => import('./views/landing/Landing'));
+const ViewAllProjects = React.lazy(() => import("./views/view-all-projects/ViewAllProjects"));
+const ViewUsers = React.lazy(() => import("./views/view-users/ViewUsers"));
+const UserPortfolio = React.lazy(() => import('./views/user-portfolio/UserPortfolio'));
 
 const routes = [
   // { path: '/', exact: true, name: 'Home', component: Landing },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/profile', name: 'UserProfile', component: UserProfile },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -83,7 +88,10 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/project/:id', exact: true, name: 'Project Details',component: ProjectDetails},
-  { path: '/my_project/:id', exact: true, name: 'My Project Details',component: MyProjectDetails}
+  { path: '/my_project/:id', exact: true, name: 'My Project Details',component: MyProjectDetails},
+  { path: "/view-all-projects", exact: true, name: "View All Projects", component: ViewAllProjects },
+  { path: "/view-users", exact: true, name: "View Users", component: ViewUsers },
+  { path: '/user-portfolio', name: 'User Portfolio', component: UserPortfolio },
 ];
 
 export default routes;

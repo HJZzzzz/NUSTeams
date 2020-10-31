@@ -6,7 +6,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
     to: '/dashboard',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     badge: {
       color: 'info',
       text: 'NEW',
@@ -16,6 +16,36 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Proj Details',
     to: '/project/:123',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'View All Projects',
+    to: '/view-all-projects',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'View Users',
+    to: '/view-users',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    }
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'User Profile',
+    to: '/profile',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',
