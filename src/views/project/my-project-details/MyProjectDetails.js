@@ -1,20 +1,29 @@
 import React, { lazy,Component,useState } from 'react'
 import {
-  CAlert,
   CBadge,
   CButton,
-  CButtonGroup,
-  CTextarea,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
-  CProgress,
   CRow,
-  CCallout,
   CListGroup,
-  CListGroupItem
+  CListGroupItem,
+  CNav,
+  CNavItem,
+  CNavLink,
+  CTabContent,
+  CTabPane,
+  CTabs,
+  CDataTable,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CToast,
+  CToastBody,
+  CToastHeader,
+  CToaster
 } from '@coreui/react'
 
 import {
@@ -29,62 +38,108 @@ const WidgetsDropdown = lazy(() => import('../../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../../widgets/WidgetsBrand.js'))
 // import photo from '../../../assets/img/project.jpg'
 
+let inbox = [
+    { id: 1, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Tom Cruise has invited you to join his project: IS4103 Capstone Project' },
+    { id: 2, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'Matt Damon has invited you to join his project: CS3240 Design Project' },
+    { id: 3, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Sam Smith has invited you to join his project: IS3106 Final Project' },
+  ]
 
 
-
-class MyProjectDetails extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      sent: false,
-      alertVisible: false,
-      alertColor: "success",
-      alertMessage: "Request is sent successfully!",
-    }
+const MyProjectDetails = () => {
     
+const fields = ['name', 'projectType', 'projectIdentifier', 'vacancy', 'status']
+const inboxFields = ['user', 'name', 'message', 'actions']
+
+const [rejectRequestModal, setRejectRequestModal] = useState(false);
+const [selectedRequestId, setSelectedRequestId] = useState(-1);
+const [toasts, setToasts] = useState([
+])
+
+const [position] = useState('top-right')
+const [autohide] = useState(true)
+const [autohideValue] = useState(5000)
+const [closeButton] = useState(true)
+const [fade] = useState(true)
+const [toastMessage, setToastMessage] = useState('');
+
+const addToast = () => {
+  setToasts([
+    ...toasts,
+    { position, autohide: autohide && autohideValue, closeButton, fade }
+  ])
+}
+const toasters = (() => {
+  return toasts.reduce((toasters, toast) => {
+    toasters[toast.position] = toasters[toast.position] || []
+    toasters[toast.position].push(toast)
+    return toasters
+  }, {})
+})()
+
+  const prepareReject = (id) => {
+    setSelectedRequestId(id);
+    setRejectRequestModal(!rejectRequestModal);
   }
 
-  send_request(){
-    if(this.state.sent==false){
-      this.setState({sent:true})
-      console.log('send')
-      // this.setState({
-      //   alertVisible: true
-        // alertColor: 'success',
-        // alertMessage: message,
-      // });
-      this.onDismiss();
-      // React.useState(10)
-      // setVisible(10)
-      setTimeout(this.onDismiss, 3000);
-    }
+  const rejectRequest = () => {
+    let id = selectedRequestId;
+    inbox = inbox.filter(item => item.id !== id);
+    setToastMessage('You have rejected the project invitation successfully.');
+    setRejectRequestModal(!rejectRequestModal);
+    addToast();
   }
-  onDismiss = () => {
-    this.setState({ alertVisible: !this.state.alertVisible});
-  };
+  const acceptRequest = (id) => {
+    inbox = inbox.filter(item => item.id !== id);
+    setToastMessage('You have accepted the project invitation successfully.');
+    addToast();
+  }
 
-  render(){
     return (
           <>
             {/* <WidgetsDropdown /> */}
-            {/* <CAlert
-              color={this.state.alertColor}
-              show={this.state.alertVisible}
-              closeButton
-              // onShowChange={onDismiss}
-              style={{ position: "fixed", top: "2rem", right: "1rem" }}
-            >
-              {this.state.alertMessage}
-            </CAlert> */}
-             <Alert
-                color={this.state.alertColor}
-                isOpen={this.state.alertVisible}
-                toggle={this.onDismiss}
-                style={{ position: "fixed", top: "2rem", right: "1rem",zIndex:"100000" }}
-              >
-                {this.state.alertMessage}
-              </Alert>
+            {Object.keys(toasters).map((toasterKey) => (
+                <CToaster
+                position={toasterKey}
+                key={'toaster' + toasterKey}
+                >
+                {
+                    toasters[toasterKey].map((toast, key) => {
+                    return (
+                        <CToast
+                        key={'toast' + key}
+                        show={true}
+                        autohide={toast.autohide}
+                        fade={toast.fade}
+                        >
+                        <CToastHeader closeButton={toast.closeButton} style={{ backgroundColor: "green", color: "white" }}>
+                            System Notification
+                        </CToastHeader>
+                        <CToastBody>
+                            {toastMessage}
+                        </CToastBody>
+                        </CToast>
+                    )
+                    })
+                }
+                </CToaster>
+            ))}
+            <CModal
+                show={rejectRequestModal}
+                onClose={() => setRejectRequestModal(!rejectRequestModal)}
+                size="sm">
+                <CModalHeader closeButton>
+                <CModalTitle>Reject Request</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                <p>Are you sure you want to reject this request?</p>
+                <p>This action is irreversible.</p>
+                </CModalBody>
+                <CModalFooter>
+                <CButton color="danger" onClick={() => rejectRequest(selectedRequestId)}>Reject</CButton>
+                <CButton color="secondary" onClick={() => setRejectRequestModal(!rejectRequestModal)}>Cancel</CButton>
+                </CModalFooter>
+            </CModal>
+
             <CCard>
             
               <CCardBody>
@@ -100,23 +155,15 @@ class MyProjectDetails extends Component {
                                   marginBottom: "1rem",
                               }}
                           />
-                          
-                          {/* <CTextarea 
-                            name="textarea-input" 
-                            id="textarea-input" 
-                            rows="5"
-                            placeholder="Content..." 
-                            className={this.state.sent==true? "disabled":""}
-                          /> */}
                           <br/>
                           <CRow>
                               <CCol col="6">
-                              <CButton variant="outline" block color="info" onClick={()=> this.send_request()} className={this.state.sent==true? "disabled":""}>
+                              <CButton variant="outline" block color="info">
                                     Edit Project
                                 </CButton>
                               </CCol>
                               <CCol col="6">
-                              <CButton variant="outline" block color="danger" onClick={()=> this.send_request()} className={this.state.sent==true? "disabled":""}>
+                              <CButton variant="outline" block color="danger">
                                     End Project
                                 </CButton>
                               </CCol>
@@ -133,7 +180,7 @@ class MyProjectDetails extends Component {
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Project Type:</span>     Module Project</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Module Code:</span>     CS3203</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Vacancy:</span>     5/5</p></CListGroupItem>
-                      <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Status:     </span><CBadge className="mr-1" color="warning" shape="pill"><span style={{color:"white"}}>OPEN</span></CBadge></CListGroupItem>
+                      <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Status:     </span><CBadge className="mr-1" color="warning" shape="pill"><span style={{color:"white"}}>ONGOING</span></CBadge></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Description:     </span>Hi Guys, this is team Software Engineering Master from CS3203, we are currently looking for two more students who are proficient in database implementition and Cloud Service(AWS)! Feell free to send your request!</CListGroupItem>
                     </CListGroup>
                     
@@ -141,89 +188,205 @@ class MyProjectDetails extends Component {
                 </CRow>
                 {/* <MainChartExample style={{height: '300px', marginTop: '40px'}}/> */}
               </CCardBody>
-              {/* <CCardFooter>    
-              </CCardFooter> */}
+
             </CCard>
             <CCard>
               <CCardBody>
                 <CRow>
                   <CCol sm='12' md="12">
                   <h3>Teammates</h3>
-                    <table className="table table-hover table-outline mb-0 d-none d-sm-table">
-                        <thead >
-                          <tr>
-                            <th className="text-center"><CIcon name="cil-people" /></th>
-                            <th>User</th>
-                            <th className="text-center">Faculty</th>
-                            <th className="text-center">Major</th>
-                            <th className="text-center">Year</th>
-                            <th className="text-center">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td className="text-center">
-                              <div className="c-avatar">
-                                <img src={'avatars/tom.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                                <span className="c-avatar-status bg-secondary"></span>
-                              </div>
-                            </td>
-                            <td>
-                              <div>Tom Cruise</div>
-                              <div className="small text-muted">
-                                Updated 1 day ago
-                              </div>
-                            </td>
-                            <td className="text-center">
-                            <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
-                            </td>
-                            
-                            <td className="text-center">
-                              Computer Science
-                            </td>
-                            
-                            <td className="text-center">
-                              4
-                            </td>
-                            <td>
-                              <CButton  block color="info">
-                                View Profile
-                              </CButton>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="text-center">
-                              <div className="c-avatar">
-                                <img src={'avatars/matt.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                                <span className="c-avatar-status bg-success"></span>
-                              </div>
-                            </td>
-                            <td>
-                              <div>Matt Damon</div>
-                              <div className="small text-muted">
-                                Updated 1 day ago
-                              </div>
-                            </td>
-                            <td className="text-center">
-                            <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
-                            </td>
-                            
-                            <td className="text-center">
-                              Inforamtion Systems
-                            </td>
-                            
-                            <td className="text-center">
-                              3
-                            </td>
-                            <td>
-                              <CButton  block color="info">
-                                View Profile
-                              </CButton>
-                            </td>
-                          </tr>
-                          
-                        </tbody>
-                      </table>
+                  <CTabs>
+                        <CNav variant="tabs">
+                            <CNavItem style={{width:"50%"}}>
+                            <CNavLink>
+                                Current
+                            </CNavLink>
+                            </CNavItem>
+                            <CNavItem style={{width:"50%"}}>
+                            <CNavLink>
+                                Pending
+                            </CNavLink>
+                            </CNavItem>
+                        </CNav>
+                        <CTabContent>
+                            <CTabPane>
+                            {/* {`1. ${this.state.lorem}`} */}
+                            <table className="table table-hover table-outline mb-0 d-none d-sm-table">
+                                <thead >
+                                <tr>
+                                    <th className="text-center"><CIcon name="cil-people" /></th>
+                                    <th>User</th>
+                                    <th className="text-center">Faculty</th>
+                                    <th className="text-center">Major</th>
+                                    <th className="text-center">Year</th>
+                                    <th className="text-center">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="text-center">
+                                        <div className="c-avatar">
+                                            <img src={'avatars/tom.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                                            <span className="c-avatar-status bg-secondary"></span>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <div>Tom Cruise</div>
+                                        <div className="small text-muted">
+                                            Updated 1 day ago
+                                        </div>
+                                        </td>
+                                        <td className="text-center">
+                                        <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        Computer Science
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        4
+                                        </td>
+                                        <td>
+                                        <CButton  block color="info">
+                                            View Profile
+                                        </CButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center">
+                                        <div className="c-avatar">
+                                            <img src={'avatars/matt.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                                            <span className="c-avatar-status bg-success"></span>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <div>Matt Damon</div>
+                                        <div className="small text-muted">
+                                            Updated 1 day ago
+                                        </div>
+                                        </td>
+                                        <td className="text-center">
+                                        <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        Inforamtion Systems
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        3
+                                        </td>
+                                        <td>
+                                        <CButton  block color="info">
+                                            View Profile
+                                        </CButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center">
+                                        <div className="c-avatar">
+                                            <img src={'avatars/5.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                                            <span className="c-avatar-status bg-secondary"></span>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <div>Sam Smith</div>
+                                        <div className="small text-muted">
+                                            Updated 1 day ago
+                                        </div>
+                                        </td>
+                                        <td className="text-center">
+                                        <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        Computer Science
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        2
+                                        </td>
+                                        <td>
+                                        <CButton  block color="info">
+                                            View Profile
+                                        </CButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center">
+                                        <div className="c-avatar">
+                                            <img src={'avatars/8.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                                            <span className="c-avatar-status bg-success"></span>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <div>Christian Bale</div>
+                                        <div className="small text-muted">
+                                            Updated 1 day ago
+                                        </div>
+                                        </td>
+                                        <td className="text-center">
+                                        <CIcon name="cil-star" style={{color:"#F3CD03"}} /> <span style={{color:"#F3CD03"}} >4.0</span>
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        Computer Engineering
+                                        </td>
+                                        
+                                        <td className="text-center">
+                                        4
+                                        </td>
+                                        <td>
+                                        <CButton  block color="info">
+                                            View Profile
+                                        </CButton>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            </CTabPane>
+                            <CTabPane>
+                            <CDataTable
+                                items={inbox}
+                                fields={inboxFields}
+                                striped
+                                itemsPerPage={5}
+                                pagination
+                                scopedSlots={{
+                                'user':
+                                    (item) => (
+                                    <td className="text-center">
+                                        <div className="c-avatar">
+                                        <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                                        <span className="c-avatar-status bg-danger"></span>
+                                        </div>
+                                    </td>
+                                    ),
+                                'actions':
+                                    (item) => (
+                                    <td>
+                                        <CRow>
+                                        <CCol sm="12" md="12" l="4" xl="4">
+                                            <CButton block color="info">View Project</CButton>
+                                        </CCol>
+                                        <CCol sm="12" md="12" l="4" xl="4">
+                                            <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
+                                        </CCol>
+                                        <CCol sm="12" md="12" l="4" xl="4">
+                                            <CButton block color="danger" onClick={() => { prepareReject(item.id) }}>Reject</CButton>
+                                        </CCol>
+                                        </CRow>
+                                    </td>
+
+                                    )
+                                }}
+                            />
+                            </CTabPane>
+                        </CTabContent>
+                    </CTabs>
+                    
                   </CCol>
                 </CRow>
               </CCardBody>
@@ -274,8 +437,6 @@ class MyProjectDetails extends Component {
           </>
         )
   }
-
-}
 
 
 
