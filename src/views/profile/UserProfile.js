@@ -16,9 +16,31 @@ import {
   CProgressBar,
   CCollapse,
   CWidgetProgress,
+  CWidgetBrand,
   CWidgetIcon,
   CWidgetProgressIcon,
-  CWidgetSimple
+  CWidgetSimple,
+  CForm,
+  CFormGroup,
+  CInput,
+  CLabel,
+  CDataTable,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+  CSelect,
+  CFormText,
+  CTextarea,
+  CSwitch,
+  CToast,
+  CToastBody,
+  CToastHeader,
+  CToaster,
+  CInputCheckbox,
+  CAlert,
+  CInputRadio
 } from '@coreui/react'
 import {
   CChartBar,
@@ -30,13 +52,25 @@ import {
 } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { DocsLink } from 'src/reusable'
+import ChartLineSimple from '../charts/ChartLineSimple'
 // import "@coreui/coreui/css/custom"
+import usersData from './projectData'
 
+const fields = ['img', 'project_name','description', 'Module_Project', 'registered',  'status']
+
+const getBadge = status => {
+  switch (status) {
+    case 'completed': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'Pending': return 'warning'
+    case 'Banned': return 'danger'
+    default: return 'primary'
+  }
+}
 const UserProfile = () => {
   const [collapse, setCollapse] = useState(false)
   const [collapseMulti, setCollapseMulti] = useState([false, false])
   const [accordion, setAccordion] = useState(1)
-  const [fade, setFade] = useState(true)
 
   const toggle = (e) => {
     setCollapse(!collapse)
@@ -64,107 +98,293 @@ const UserProfile = () => {
   const toggleFade = () => {
     setFade(!fade)
   }
+
+  const [primary, setPrimary] = useState(false)
+  const [editAbout, setAbout] = useState(false)
+  const [editSkill, setSkill] = useState(false)
+  const [report, setReport] = useState(false)
+
+  const positions = [
+    'static',
+    'top-left',
+    'top-center',
+    'top-right',
+    'top-full',
+    'bottom-left',
+    'bottom-center',
+    'bottom-right',
+    'bottom-full'
+  ]
+
+  const [toasts, setToasts] = useState([
+  ])
+
+
+  const [position, setPosition] = useState('top-right')
+  const [autohide, setAutohide] = useState(true)
+  const [autohideValue, setAutohideValue] = useState(5000)
+  const [java, setJava] = useState(true)
+  const [javaScript, setJavaScript] = useState(true)
+  const [communication, setCommunication] = useState(true)
+  const [leadership, setLeadership] = useState(true)
+  const [hiphop, setHiphop] = useState(true)
+  const [piano, setPiano] = useState(true)
+
+  const [closeButton, setCloseButton] = useState(true)
+  const [fade, setFade] = useState(true)
+
+  const addToast = () => {
+    setToasts([
+      ...toasts, 
+      { position, autohide: autohide && autohideValue, closeButton, fade, java,
+      javaScript, communication, leadership, hiphop, piano }
+    ])
+  }
+
+  const toasters = (()=>{
+    return toasts.reduce((toasters, toast) => {
+      toasters[toast.position] = toasters[toast.position] || []
+      toasters[toast.position].push(toast)
+      return toasters
+    }, {})
+  })()
+
+
   return (
     <>
-        <CRow>
-          <CCol>
-          <div class="profile-main">
-            <div class="profile-header">
-              <div class="user-detail">
-                <div class="user-image">
-                  <img src="http://nicesnippets.com/demo/up-profile.jpg"></img>
-                </div>
-                <div class="user-data">
-                  <br></br>
-                  <h2>&nbsp; &nbsp; Smith Alexander</h2>
-                  <br></br>
-                  <p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>Year 4 Information Systems Student at NUS</strong></p>
-                    <p>
-                      &nbsp; &nbsp; &nbsp; &nbsp;
-                      <CButton className="btn-facebook btn-brand mr-1 mb-1"><CIcon name="cib-facebook" /></CButton>
-                      <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cib-linkedin" /></CButton>
-                      <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cib-github" /></CButton>
-                      <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cil-envelope-closed" /></CButton>
-                      <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cil-phone" /></CButton>
-                    </p>
-                </div>
-              </div>
-            </div>
-          </div>  
+      <CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader>
+              <h4>About Me  
+                <CIcon width={24} onClick={() => setAbout(!editAbout)} className="float-right" name="cil-pencil"/> 
+              </h4>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                <CCol xs="12" sm="6" lg="3">
+                  <div class="profile-main">
+                    <div class="profile-header">
+                      <div class="user-detail">
+                        <div class="user-image">
+                          <img src="https://ii.yuki.la/c/da/3e777cb605409054fab6f88c5cf2ff79c6e42c1d8c3697278129051bcd51adac.jpg"></img>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="clearfix">
+                      <div className="float-left">
+                        <CBadge color="success" className="float-middle">WELL-LOVED</CBadge> 
+                      </div>
+                      <div className="float-right">
+                        <small className="text-muted">4.0/4.0</small>
+
+                      </div>
+                    </div>
+                    <CProgress
+                      className="progress-xs mt-2"
+                      precision={1}
+                      color="success"
+                      value={100}
+                    />
+                </CCol>
+                <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                  <CForm action="" method="post" className="form-horizontal">
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Name</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Jones Ferdinand</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Major & Year</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Computer Science, Year 4</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Bio</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Hello, I am a Year 4 student who is interested in product design, PM me for collab!</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Contact</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <CButton className="btn-facebook btn-brand mr-1 mb-1"><CIcon name="cib-facebook" /></CButton>
+                        <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cib-linkedin" /></CButton>
+                        <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cib-github" /></CButton>
+                        <CButton className="btn-linkedin btn-brand mr-1 mb-1"><CIcon name="cil-envelope-closed" /></CButton>
+                        <CButton className="btn-github btn-brand mr-1 mb-1"><CIcon name="cil-phone" /></CButton>
+                      </CCol>
+                    </CFormGroup>
+                  </CForm>                  
+                </CCol>
+              </CRow>
+              <CModal 
+                show={editAbout} 
+                onClose={() => setAbout(!editAbout)}
+                color="primary"
+                size="lg"
+              >
+                <CModalHeader closeButton>
+                  <CModalTitle>Edit Basic Information</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                  <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">Name</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CInput id="text-input" name="text-input" placeholder="Jones Ferdinand" />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="select">Major</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CSelect custom name="select" id="select">
+                          <option value="0">Computer Science</option>
+                          <option value="1">Information Systems</option>
+                          <option value="2">Information Security</option>
+                          <option value="3">Computer Engineering</option>
+                        </CSelect>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="select">Admit Term</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CSelect custom name="select" id="select">
+                          <option value="0">2017/18 Semester 1</option>
+                          <option value="1">2017/18 Semester 2</option>
+                          <option value="2">2018/19 Semester 1</option>
+                          <option value="3">2018/19 Semester 2</option>
+                        </CSelect>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="textarea-input">Bio</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CTextarea 
+                          name="textarea-input" 
+                          id="textarea-input" 
+                          rows="9"
+                          placeholder="Hello, I am a Year 4 student who is interested in product design, PM me for collab!" 
+                        />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">Facebook</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="6">
+                        <CInput id="text-input" name="text-input" placeholder="Jones_Ferdinand" />
+                      </CCol>
+                      <CCol xs="12" md="3">
+                        <CSwitch
+                          className="mr-1"
+                          color="primary"
+                          defaultChecked
+                        />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">Linkedin</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="6">
+                        <CInput id="text-input" name="text-input" placeholder="https://www.linkedin.com/in/jones_ferdinand-ba4032179/" />
+                      </CCol>
+                      <CCol xs="12" md="3">
+                        <CSwitch
+                          className="mr-1"
+                          color="primary"
+                          defaultChecked
+                        />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">GitHub</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="6">
+                        <CInput id="text-input" name="text-input" placeholder="Jones_Ferdinand" />
+                      </CCol>
+                      <CCol xs="12" md="3">
+                        <CSwitch
+                          className="mr-1"
+                          color="primary"
+                          defaultChecked
+                        />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">Email</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="6">
+                        <CInput id="text-input" name="text-input" placeholder="Jones_Ferdinand@gmail.com" />
+                      </CCol>
+                      <CCol xs="12" md="3">
+                        <CSwitch
+                          className="mr-1"
+                          color="primary"
+                          defaultChecked
+                        />
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="text-input">Telegram</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="6">
+                        <CInput id="text-input" name="text-input" placeholder="Jones_Ferdinand" />
+                      </CCol>
+                      <CCol xs="12" md="3">
+                        <CSwitch
+                          className="mr-1"
+                          color="primary"
+                          defaultChecked
+                        />
+                      </CCol>
+                    </CFormGroup>
+                  </CForm>
+                </CModalBody>
+                <CModalFooter>
+                  <CButton color="primary" onClick={() => setAbout(!editAbout)}>
+                    Save
+                  </CButton>{' '}
+                  <CButton color="secondary" onClick={() => setAbout(!editAbout)}>
+                    Cancel
+                  </CButton>
+                </CModalFooter>
+              </CModal>
+            </CCardBody>
+          </CCard>
         </CCol>
-        </CRow>
-
-    <CRow>
-      <CCol>
-      <CCard>
-        <CCardHeader>
-          <h4>About</h4>
-        </CCardHeader>
-        <CCardBody>
-          I am a Year 4 NUS Information Systems student, I am passionate in drawing insights from data and turning them into solutions, strategies and business values. I have experience with real world big data including RNA expression data, e-commerce business data and enterprise operational data. I am familiar with ETL process and CRISP DM. I also have a journal published on Frontiers in Genetics about a bio-informatics tool I built for gene expression data analysis. Area of focus: Data Science, Machine Learning, Business Intelligence.
-          Competencies: Data Science, Machine Learning, Data Visualisation, Database Management, High-Dimensional Statistical Analysis, Python, R, R shiny, SQL, NoSQL, Matlab
-        </CCardBody>
-      </CCard>
-    </CCol>
-    </CRow>
-
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader>
-            <h4>User Ranking</h4>
-          </CCardHeader>
-          <CCardBody>
-            <div className="progress-group">
-              <div className="progress-group-header">
-                <span className="title">Communication Skills</span>
-                <span className="ml-auto font-weight-bold">4.5 <span className="text-muted small">(3 teammates voted)</span></span>
-              </div>
-              <div className="progress-group-bars">
-                <CProgress className="progress-xs" color="info" value="80" />
-              </div>
-            </div>
-            <div className="progress-group">
-              <div className="progress-group-header">
-                <span className="title">Technical Skills</span>
-                  <span className="ml-auto font-weight-bold">4.8 <span className="text-muted small">(3 teammates voted)</span>
-                </span>
-              </div>
-              <div className="progress-group-bars">
-                <CProgress className="progress-xs" color="info" value="90" />
-              </div>
-            </div>
-                  <div className="progress-group">
-                    <div className="progress-group-header">
-                      <span className="title">Leadership</span>
-                      <span className="ml-auto font-weight-bold">4.9 <span className="text-muted small">(3 teammates voted)</span></span>
-                    </div>
-                    <div className="progress-group-bars">
-                      <CProgress className="progress-xs" color="info" value="96" />
-                    </div>
-                  </div>
-                  
-                  <div className="progress-group">
-                    <div className="progress-group-header">
-                      <span className="title">Punctuality</span>
-                      <span className="ml-auto font-weight-bold">5.0 <span className="text-muted small">(3 teammates voted)</span></span>
-                    </div>
-                    <div className="progress-group-bars">
-                      <CProgress className="progress-xs" color="info" value="100" />
-                    </div>
-                  </div>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader>
-            <h4>Skills</h4>
-          </CCardHeader>
-          <CCardBody>
-            <div id="accordion">
+        <CCol xs="12" xl="6">
+          <CCard>
+            <CCardHeader>
+              <h4>Skills
+                <CIcon width={24} onClick={() => setSkill(!editSkill)} className="float-right" name="cil-pencil"/> 
+              </h4>
+            </CCardHeader>
+            <CCardBody>
+              <div id="accordion">
               <CCard className="mb-0">
                 <CCardHeader id="headingOne">
                   <CButton 
@@ -179,25 +399,15 @@ const UserProfile = () => {
                   <CCardBody>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Ruichun" header="Java" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Ruichun and 10 others" header="Java" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon header="JavaScript" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Shengjing and 10 others"header="JavaScript" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="Python" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="C" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
+                      </CCol>                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
@@ -216,40 +426,12 @@ const UserProfile = () => {
                   <CCardBody>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Bryan" header="Communication" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Bryan and 10 others" header="Communication" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon header="Leadership" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      
-                    </CRow>
-                  </CCardBody>
-                </CCollapse>
-              </CCard>
-              <CCard className="mb-0">
-                <CCardHeader id="headingThree">
-                  <CButton 
-                    block 
-                    className="text-left m-0 p-0" 
-                    onClick={() => setAccordion(accordion === 2 ? null : 2)}
-                  >
-                    <span className="title">Languages</span>
-                  </CButton>
-                </CCardHeader>
-                <CCollapse show={accordion === 2}>
-                  <CCardBody>
-                    <CRow>
-                      <CCol>
-                        <CWidgetIcon header="English" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-check"/>
-                        </CWidgetIcon>
-                      </CCol>
-                      <CCol>
-                        <CWidgetIcon header="Spanish" color="info" iconPadding={false}>
+                        <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
@@ -281,92 +463,288 @@ const UserProfile = () => {
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
                       </CCol>
-                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
               </CCard>
             </div>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+            <CModal 
+              show={editSkill} 
+              onClose={() => setSkill(!editSkill)}
+              color="primary"
+              size="lg"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit Skills</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+                  <CAlert color="danger">
+                    Please note that the endorsement(s) corresponding to removed skills will not be recovered 
+                  </CAlert>
+                  <CForm>
+                    <h5>Tools and Technologies</h5>
+                    <CRow>
+                      <CCol>
+                        <CWidgetIcon text="Endorced By Ruichun and 10 others" header="Java" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>
+                      <CCol>
+                        <CWidgetIcon text="Endorced By Shengjing and 10 others"header="JavaScript" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>                      
+                    </CRow>
 
+                    <h5>Soft Skills</h5>
+                    <CRow>
+                      <CCol>
+                        <CWidgetIcon text="Endorced By Bryan and 10 others" header="Communication" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>
+                      <CCol>
+                        <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>
+                    </CRow>
+
+                    <h5>Others</h5>
+                    <CRow>
+                      <CCol>
+                        <CWidgetIcon header="Hip-hop" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>
+                      <CCol>
+                        <CWidgetIcon header="Piano" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-trash"/>
+                        </CWidgetIcon>
+                      </CCol>
+                    </CRow>
+
+                    <CFormGroup variant="custom-checkbox" className="my-2 mt-4">
+                      <CInputCheckbox
+                        id="autohide"
+                        checked={autohide}
+                        onChange={e => { setAutohide(e.target.checked) }}
+                        custom
+                      />
+                      <CLabel variant="custom-checkbox" htmlFor="autohide">
+                        Add New Skills 
+                      </CLabel>
+                    </CFormGroup>
+                    {
+                      autohide &&
+                      <CFormGroup className="my-2">
+                        <CCol>
+                          <CLabel htmlFor="ccyear">Skill Type</CLabel>
+                          <CSelect custom name="select" id="select">
+                            <option value="0">Please select</option>
+                            <option value="1">Tools & Technologies</option>
+                            <option value="2">Soft Skills </option>
+                            <option value="3">Other Skills</option>
+                          </CSelect>
+                        </CCol>
+                        <CCol>
+                          <CLabel htmlFor="ccyear">Skill Name</CLabel>
+                          <CInput id="text-input" name="text-input" placeholder="Skill Name" />
+                        </CCol>
+                        <CCol>
+                          <br></br>
+                          <CButton
+                            className="mr-1 w-25"
+                            color="info"
+                          >
+                            Add 
+                          </CButton>
+                        </CCol>
+                        
+                      </CFormGroup>
+
+                    }
+                
+
+              </CForm>
+            
+              {Object.keys(toasters).map((toasterKey) => (
+                <CToaster
+                  position='top-center'
+                  key={'toaster' + toasterKey}
+                >
+                  {
+                    toasters[toasterKey].map((toast, key)=>{
+                    return(
+                      <CToast
+                        key={'toast' + key}
+                        show={true}
+                        autohide={toast.autohide}
+                        fade={toast.fade}
+                      >
+                        <CToastHeader closeButton={toast.closeButton}>
+                          Confirmation
+                        </CToastHeader>
+                        <CToastBody>
+                          {`Skills has been updated`}
+                        </CToastBody>
+                      </CToast>
+                    )
+                  })
+                  }
+                </CToaster>
+              ))}
+            
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="primary" onClick={addToast}>
+                  Save
+                </CButton>{' '}
+                <CButton color="secondary" onClick={() => setSkill(!editSkill)}>
+                  Cancel
+                </CButton>
+              </CModalFooter>
+            </CModal>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
     <CRow>
       <CCol>
       <CCard>
         <CCardHeader>
-          <h4>Project Involved</h4>
+          <h4>Projects Involved</h4>
         </CCardHeader>
         <CCardBody>
           <CListGroup>
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg"></img>
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; NUSTeams
+                          </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Project focuses on design and critique
+                        </div>
+                      </div>
                     </div>
-                    <h5>
+                  </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
                       <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp;CS3240 Interaction Design
+                      Module Project
                       </strong> 
-                    </h5>
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; 2020-2021 Semester 1
                     </div>
                     <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+                      CS3240 Interaction Design 
                     </div>
-                  </div>
-                </div>
-                    
-              </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
+                      <strong>
+                      2020-2021 Semester 1
+                      </strong> 
+                    </div>
+                    <div className="float-right">
+                        <CBadge color="success" className="float-middle">COMPLETED</CBadge> 
+                      </div>
+                </CCol>
+              </CRow>
             </CListGroupItem>
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg"></img>
-                    </div>
-                    <h5>
-                      <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp;IS4103 Information Systems Capstone Project 
-                    </strong>
-                    </h5>
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; 2019-2020 Semester 1
-                    </div>
-                    
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; IS4103 Team 2
+                          </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Project focuses on full stack development
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
+                      <strong>
+                      Module Project
+                      </strong> 
+                    </div>
+                    <div>
+                      IS4103 Capstone Project
+                    </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
+                      <strong>
+                      2020-2021 Semester 1
+                      </strong> 
+                    </div>
+                    <div className="float-right">
+                        <CBadge color="success" className="float-middle">COMPLETED</CBadge> 
+                      </div>
+                </CCol>
+              </CRow>
             </CListGroupItem>
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg"></img>
-                    </div>
-                    <h5>
-                      <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp; IS3103 Information Systems Leadership and Communication
-                    </strong>
-                    </h5>
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; 2018-2019 Semester 1
-                    </div>
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; IS3106 Team 2
+                          </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Project focuses on front end development
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
+                      <strong>
+                      Module Project
+                      </strong> 
+                    </div>
+                    <div>
+                      IS3106 Enterprise Systems Interface Design and Development
+                    </div>
+                </CCol>
+                <CCol xs="12" sm="6" lg="3">
+                  <div>
+                      <strong>
+                      2020-2021 Semester 1
+                      </strong> 
+                    </div>
+                    <div className="float-right">
+                        <CBadge color="success" className="float-middle">COMPLETED</CBadge> 
+                      </div>
+                </CCol>
+              </CRow>
             </CListGroupItem>
           </CListGroup>
         </CCardBody>
@@ -462,69 +840,190 @@ const UserProfile = () => {
         <CCardBody>
           <CListGroup>            
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://cdn4.iconfinder.com/data/icons/users-29/32/166-01-512.png"></img>
-                    </div>
-                    <h5>
-                      <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp;Teammate From Term Project
-                    </strong>
-                    </h5>
-                    
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://textgod.com/wp-content/uploads/2019/06/louis-roze-trui-pink.jpg"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Tom Cruise 
+                        </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Posted 3 days ago 
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CCol>
+                <CCol xs="12" xl="6">
+                  <div>
+                    Stephen is a hardworker who values teamwork. Highly recommended!
+                  </div>
+                  <CIcon width={24} className="float-right" name="cil-warning" onClick={() => setReport(!report)} /> 
+                </CCol>
+              </CRow>
             </CListGroupItem>
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/businesswoman-74-773249.png"></img>
-                    </div>
-                    <h5>
-                      <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp;Steven From CS3240 Term Project
-                    </strong>
-                    </h5>
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; 2019-2020 Semester 1
-                    </div>
-                    
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLpo2kLh0mOYWWqzKaVwIp-FhQkOAkIIDqdg&usqp=CAU"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Matt Damon
+                        </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Posted on 3/29/2020
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CCol>
+                <CCol xs="12" xl="6">
+                  <div>
+                    Good programmer
+                  </div>
+                  <CIcon width={24} className="float-right" name="cil-warning" onClick={() => setReport(!report)}/> 
+                </CCol>
+              </CRow>
             </CListGroupItem>
             <CListGroupItem action>
-              <div class="experience-main">
-                <div class="experience-detail">
-                  <div class="experience-data">
-                    <div class="experience-image">
-                      <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png"></img>
-                    </div>
-                    <h5>
-                      <strong>
-                      &nbsp; &nbsp; &nbsp; &nbsp;Alex From IS4103 Term Project
-                    </strong>
-                    </h5>
-                    
-                    <div>
-                      &nbsp; &nbsp; &nbsp; &nbsp; The course stresses the importance of user-centred design and usability in the development of computer applications and systems. 
+              <CRow>
+                <CCol xs="12" xl="6">
+                  <div class="experience-main">
+                    <div class="experience-detail">
+                      <div class="experience-data">
+                        <div class="experience-image">
+                          <img src="https://selectedsoundsblog.files.wordpress.com/2015/09/george1.jpg"></img>
+                        </div>
+                        <h5>
+                          <strong>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Sam Smith
+                        </strong>
+                        </h5>
+                        <div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; Posted on 3/29/2020
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CCol>
+                <CCol xs="12" xl="6">
+                  <div>
+                    Pleasant teammate who you can consult with anything.
+                  </div>
+                  <CIcon width={24} className="float-right" name="cil-warning" onClick={() => setReport(!report)}/> 
+                </CCol>
+              </CRow>
             </CListGroupItem>
           </CListGroup>
+          <CModal 
+              show={report} 
+              onClose={setReport}
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Report an issue</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+                <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
+                  <CFormGroup row>
+                    <CCol md="3">
+                      <CLabel>Name</CLabel>
+                    </CCol>
+                    <CCol xs="12" md="9">
+                      <p className="form-control-static">Tom Cruise</p>
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="3">
+                      <CLabel>Content</CLabel>
+                    </CCol>
+                    <CCol xs="12" md="9">
+                      <p className="form-control-static">Stephen is a hardworker who values teamwork. Highly recommended!</p>
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="3">
+                      <CLabel>Reason(s)</CLabel>
+                    </CCol>
+                    <CCol md="9">
+                      <CFormGroup variant="checkbox">
+                        <CInputRadio className="form-check-input" id="radio1" name="radios" value="option1" />
+                        <CLabel variant="checkbox" htmlFor="radio1">False Information</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="checkbox">
+                        <CInputRadio className="form-check-input" id="radio2" name="radios" value="option2" />
+                        <CLabel variant="checkbox" htmlFor="radio2">Illegal Information</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="checkbox">
+                        <CInputRadio className="form-check-input" id="radio3" name="radios" value="option3" />
+                        <CLabel variant="checkbox" htmlFor="radio3">Personal Attack</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="checkbox">
+                        <CInputRadio className="form-check-input" id="radio4" name="radios" value="option3" />
+                        <CLabel variant="checkbox" htmlFor="radio3">Others</CLabel>
+                      </CFormGroup>
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="3">
+                      <CLabel htmlFor="textarea-input">Textarea</CLabel>
+                    </CCol>
+                    <CCol xs="12" md="9">
+                      <CTextarea 
+                        name="textarea-input" 
+                        id="textarea-input" 
+                        rows="9"
+                        placeholder="Report description..." 
+                      />
+                    </CCol>
+                  </CFormGroup>
+                </CForm>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="primary" onClick={addToast}>Report</CButton>{' '}
+                <CButton 
+                  color="secondary" 
+                  onClick={() => setReport(false)}
+                >Cancel</CButton>
+              </CModalFooter>
+              {Object.keys(toasters).map((toasterKey) => (
+                <CToaster
+                  position='top-center'
+                  key={'toaster' + toasterKey}
+                >
+                  {
+                    toasters[toasterKey].map((toast, key)=>{
+                    return(
+                      <CToast
+                        key={'toast' + key}
+                        show={true}
+                        autohide={toast.autohide}
+                        fade={toast.fade}
+                      >
+                        <CToastHeader closeButton={toast.closeButton}>
+                          Confirmation
+                        </CToastHeader>
+                        <CToastBody>
+                          {`Your report has been received and will be reviewed by our support staff soon`}
+                        </CToastBody>
+                      </CToast>
+                    )
+                  })
+                  }
+                </CToaster>
+              ))}
+            </CModal>
         </CCardBody>
       </CCard>
     </CCol>
