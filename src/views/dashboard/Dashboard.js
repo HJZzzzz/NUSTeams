@@ -24,6 +24,11 @@ import {
   CToastBody,
   CToastHeader,
   CToaster,
+  CTabContent,
+  CTabPane,
+  CTabs,
+  CNav,
+  CNavLink
 } from '@coreui/react'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
@@ -41,17 +46,26 @@ let inbox = [
   { id: 3, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Sam Smith has invited you to join his project: IS3106 Final Project' },
 ]
 
+let outbox = [
+  { id: 1, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'You requested to join Tom Cruise’s project: IS4444 Engineering Project', status: 'PENDING' },
+  { id: 2, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'You requested to join Matt Damon’s project: IS3333 Design Project', status: 'PENDING' },
+  { id: 3, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'You requested to join Sam Smith’s project: CS2102 Database Project', status: 'SUCCESS' },
+]
+
 const getBadge = status => {
   switch (status) {
     case 'OPEN': return 'success'
+    case 'SUCCESS': return 'success'
     case 'Inactive': return 'secondary'
     case 'ONGOING': return 'warning'
+    case 'PENDING': return 'warning'
     case 'CLOSED': return 'danger'
     default: return 'primary'
   }
 }
 const fields = ['name', 'projectType', 'projectIdentifier', 'vacancy', 'status']
 const inboxFields = ['user', 'name', 'message', 'actions']
+const outboxFields = ['user', 'name', 'message', 'status']
 const Dashboard = () => {
   let counter = 4;
   const [createProjectModal, setCreateProjectModal] = useState(false);
@@ -213,41 +227,84 @@ const Dashboard = () => {
           <b>Inbox</b>
         </CCardHeader>
         <CCardBody>
-          <CDataTable
-            items={inbox}
-            fields={inboxFields}
-            striped
-            itemsPerPage={5}
-            pagination
-            scopedSlots={{
-              'user':
-                (item) => (
-                  <td className="text-center">
-                    <div className="c-avatar">
-                      <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                      <span className="c-avatar-status bg-danger"></span>
-                    </div>
-                  </td>
-                ),
-              'actions':
-                (item) => (
-                  <td>
-                    <CRow>
-                      <CCol sm="12" md="12" l="4" xl="4">
-                        <CButton block color="info">View Project</CButton>
-                      </CCol>
-                      <CCol sm="12" md="12" l="4" xl="4">
-                        <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
-                      </CCol>
-                      <CCol sm="12" md="12" l="4" xl="4">
-                        <CButton block color="danger" onClick={() => { prepareReject(item.id) }}>Reject</CButton>
-                      </CCol>
-                    </CRow>
-                  </td>
+          <CTabs>
+            <CNav variant="tabs">
+              <CNavLink>
+                Received
+              </CNavLink>
+              <CNavLink>
+                Sent
+              </CNavLink>
+            </CNav>
+            <CTabContent>
+              <CTabPane>
+                <CDataTable
+                  items={inbox}
+                  fields={inboxFields}
+                  striped
+                  itemsPerPage={5}
+                  pagination
+                  scopedSlots={{
+                    'user':
+                      (item) => (
+                        <td className="text-center">
+                          <div className="c-avatar">
+                            <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                            <span className="c-avatar-status bg-danger"></span>
+                          </div>
+                        </td>
+                      ),
+                    'actions':
+                      (item) => (
+                        <td>
+                          <CRow>
+                            <CCol sm="12" md="12" l="4" xl="4">
+                              <CButton block color="info">View Project</CButton>
+                            </CCol>
+                            <CCol sm="12" md="12" l="4" xl="4">
+                              <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
+                            </CCol>
+                            <CCol sm="12" md="12" l="4" xl="4">
+                              <CButton block color="danger" onClick={() => { prepareReject(item.id) }}>Reject</CButton>
+                            </CCol>
+                          </CRow>
+                        </td>
 
-                )
-            }}
-          />
+                      )
+                  }}
+                />
+              </CTabPane>
+              <CTabPane>
+                <CDataTable
+                  items={outbox}
+                  fields={outboxFields}
+                  striped
+                  itemsPerPage={5}
+                  pagination
+                  scopedSlots={{
+                    'user':
+                      (item) => (
+                        <td className="text-center">
+                          <div className="c-avatar">
+                            <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                            <span className="c-avatar-status bg-danger"></span>
+                          </div>
+                        </td>
+                      ),
+                    'status':
+                      (item) => (
+                        <td>
+                          <CBadge color={getBadge(item.status)}>
+                            {item.status}
+                          </CBadge>
+                        </td>
+                      )
+                  }}
+                />
+              </CTabPane>
+            </CTabContent>
+          </CTabs>
+
         </CCardBody>
       </CCard>
 
