@@ -28,8 +28,12 @@ import {
   CTabPane,
   CTabs,
   CNav,
-  CNavLink
+  CNavLink,
+  CLink
 } from '@coreui/react'
+
+import { useHistory } from 'react-router-dom';
+
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 
@@ -158,6 +162,12 @@ const Dashboard = () => {
     }, {})
   })()
 
+  const history = useHistory()
+
+  const pageChange = () => {
+    history.push(`/project/:123`)
+  }
+
   return (
     <>
       <WidgetsDropdown />
@@ -208,6 +218,12 @@ const Dashboard = () => {
             itemsPerPage={5}
             pagination
             scopedSlots={{
+              'name':
+                (item) => (
+                  <td>
+                    <CLink onClick={pageChange}>{item.name}</CLink>
+                  </td>
+                ),
               'status':
                 (item) => (
                   <td>
@@ -259,7 +275,7 @@ const Dashboard = () => {
                         <td>
                           <CRow>
                             <CCol sm="12" md="12" l="4" xl="4">
-                              <CButton block color="info">View Project</CButton>
+                              <CButton block color="info" onClick={pageChange}>View Project</CButton>
                             </CCol>
                             <CCol sm="12" md="12" l="4" xl="4">
                               <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
