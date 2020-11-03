@@ -40,7 +40,9 @@ import {
   CToaster,
   CInputCheckbox,
   CAlert,
-  CInputRadio
+  CInputRadio,
+  CFade,
+  CLink
 } from '@coreui/react'
 import {
   CChartBar,
@@ -67,14 +69,14 @@ const getBadge = status => {
     default: return 'primary'
   }
 }
-const UserProfile = () => {
-  const [collapse, setCollapse] = useState(false)
-  const [collapseMulti, setCollapseMulti] = useState([false, false])
-  const [accordion, setAccordion] = useState(1)
+  const UserProfile = () => {
+    const [collapse, setCollapse] = useState(false)
+    const [collapseMulti, setCollapseMulti] = useState([false, false])
+    const [accordion, setAccordion] = useState(1)
 
-  const toggle = (e) => {
-    setCollapse(!collapse)
-    e.preventDefault()
+    const toggle = (e) => {
+      setCollapse(!collapse)
+      e.preventDefault()
   }
 
   const toggleMulti = (type) => {
@@ -104,21 +106,8 @@ const UserProfile = () => {
   const [editSkill, setSkill] = useState(false)
   const [report, setReport] = useState(false)
 
-  const positions = [
-    'static',
-    'top-left',
-    'top-center',
-    'top-right',
-    'top-full',
-    'bottom-left',
-    'bottom-center',
-    'bottom-right',
-    'bottom-full'
-  ]
-
   const [toasts, setToasts] = useState([
   ])
-
 
   const [position, setPosition] = useState('top-right')
   const [autohide, setAutohide] = useState(true)
@@ -129,9 +118,14 @@ const UserProfile = () => {
   const [leadership, setLeadership] = useState(true)
   const [hiphop, setHiphop] = useState(true)
   const [piano, setPiano] = useState(true)
-
   const [closeButton, setCloseButton] = useState(true)
   const [fade, setFade] = useState(true)
+
+  const [showCard, setShowCard] = useState(true)
+  const [showTech, setShowTech] = useState(true)
+  const [showNewTech, setShowNewTech] = useState(false)
+  const [post, setPost] = useState(false)
+  const [toastMessage, setToastMessage] = useState('');
 
   const addToast = () => {
     setToasts([
@@ -149,9 +143,68 @@ const UserProfile = () => {
     }, {})
   })()
 
+  const updatePost = () => {
+    setPost(!post)
+    setShowCard(true)
+  }
 
+  const updateCard = () => {
+    setShowCard(false)
+  }
+
+  const updateTech = () => {
+    setShowTech(false)
+  }
+
+  const updateNewTech = () => {
+    setShowNewTech(true)
+  }
+
+  const saveSkills = () => {
+    setSkill(!editSkill)
+    setToastMessage('Your skills have been updated');
+    addToast();
+  }
+
+  const saveReport = () => {
+    setReport(!report)
+    setToastMessage('Your report has been received');
+    addToast();
+  }
+
+  const saveAbout = () => {
+    setAbout(!editAbout)
+    setToastMessage('Your basic information has been updated');
+    addToast();
+  }
   return (
     <>
+    {Object.keys(toasters).map((toasterKey) => (
+      <CToaster
+        position={toasterKey}
+        key={'toaster' + toasterKey}
+      >
+        {
+          toasters[toasterKey].map((toast, key) => {
+          return (
+            <CToast
+              key={'toast' + key}
+              show={true}
+              autohide={toast.autohide}
+                ade={toast.fade}
+            >
+            <CToastHeader closeButton={toast.closeButton} style={{ backgroundColor: "green", color: "white" }}>
+              System Notification
+            </CToastHeader>
+            <CToastBody>
+              {toastMessage}
+            </CToastBody>
+            </CToast>
+          )
+        })
+      }
+    </CToaster>
+    ))}
       <CRow>
         <CCol>
           <CCard>
@@ -365,7 +418,7 @@ const UserProfile = () => {
                   </CForm>
                 </CModalBody>
                 <CModalFooter>
-                  <CButton color="primary" onClick={() => setAbout(!editAbout)}>
+                  <CButton color="primary" onClick={saveAbout}>
                     Save
                   </CButton>{' '}
                   <CButton color="secondary" onClick={() => setAbout(!editAbout)}>
@@ -404,14 +457,21 @@ const UserProfile = () => {
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
+                        <CFade in={showTech} unmountOnExit={true}>
                         <CWidgetIcon text="Endorced By Shengjing and 10 others"header="JavaScript" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
+                        </CFade>
+                        <CFade in={showNewTech} unmountOnExit={true}>
+                        <CWidgetIcon header="php" color="info" iconPadding={false}>
+                          <CIcon width={24} name="cil-check"/>
+                        </CWidgetIcon>
+                        </CFade>
                       </CCol>                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
-              </CCard>
+              </CCard>  
               <CCard className="mb-0">
                 <CCardHeader id="headingThree">
                   <CButton 
@@ -431,11 +491,12 @@ const UserProfile = () => {
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
+                        <CFade in={showCard} unmountOnExit={true}>
                         <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
                           <CIcon width={24} name="cil-check"/>
                         </CWidgetIcon>
+                        </CFade>
                       </CCol>
-                      
                     </CRow>
                   </CCardBody>
                 </CCollapse>
@@ -485,41 +546,114 @@ const UserProfile = () => {
                     <h5>Tools and Technologies</h5>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Ruichun and 10 others" header="Java" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CWidgetIcon text="Endorced By Ruichun and 10 others" header="Java" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Shengjing and 10 others"header="JavaScript" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CFade in={showTech} unmountOnExit={true}>
+                        <CWidgetIcon text="Endorced By Shengjing and 10 others" header="JavaScript" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateTech}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
+                        </CFade>
+
+                        <CFade in={showNewTech} unmountOnExit={true}>
+                        <CWidgetIcon header="php" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost">
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
+                        </CWidgetIcon>
+                        </CFade>
                       </CCol>                      
                     </CRow>
 
                     <h5>Soft Skills</h5>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Bryan and 10 others" header="Communication" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CWidgetIcon text="Endorced By Bryan and 10 others" header="Communication" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CFade in={showCard} unmountOnExit={true}>
+                        <CWidgetIcon text="Endorced By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
+                        </CFade>
                       </CCol>
                     </CRow>
 
                     <h5>Others</h5>
                     <CRow>
                       <CCol>
-                        <CWidgetIcon header="Hip-hop" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CWidgetIcon header="Hip-hop" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
                       </CCol>
                       <CCol>
-                        <CWidgetIcon header="Piano" color="info" iconPadding={false}>
-                          <CIcon width={24} name="cil-trash"/>
+                        <CWidgetIcon header="Piano" color="info" iconPadding={false}
+                          footerSlot={
+                            <CCardFooter className="card-footer px-3 py-2">
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                Delete 
+                              </CButton>
+                              <CIcon name="cil-trash" className="float-right" width="25"/>
+                            </CCardFooter>
+                          }
+                        >
+                         <CIcon width={24} name="cil-check" className="mx-5"/>
                         </CWidgetIcon>
                       </CCol>
                     </CRow>
@@ -556,6 +690,7 @@ const UserProfile = () => {
                           <CButton
                             className="mr-1 w-25"
                             color="info"
+                            onClick={updateNewTech}
                           >
                             Add 
                           </CButton>
@@ -568,36 +703,9 @@ const UserProfile = () => {
 
               </CForm>
             
-              {Object.keys(toasters).map((toasterKey) => (
-                <CToaster
-                  position='top-center'
-                  key={'toaster' + toasterKey}
-                >
-                  {
-                    toasters[toasterKey].map((toast, key)=>{
-                    return(
-                      <CToast
-                        key={'toast' + key}
-                        show={true}
-                        autohide={toast.autohide}
-                        fade={toast.fade}
-                      >
-                        <CToastHeader closeButton={toast.closeButton}>
-                          Confirmation
-                        </CToastHeader>
-                        <CToastBody>
-                          {`Skills has been updated`}
-                        </CToastBody>
-                      </CToast>
-                    )
-                  })
-                  }
-                </CToaster>
-              ))}
-            
               </CModalBody>
               <CModalFooter>
-                <CButton color="primary" onClick={addToast}>
+                <CButton color="primary" onClick={saveSkills}>
                   Save
                 </CButton>{' '}
                 <CButton color="secondary" onClick={() => setSkill(!editSkill)}>
@@ -991,38 +1099,13 @@ const UserProfile = () => {
                 </CForm>
               </CModalBody>
               <CModalFooter>
-                <CButton color="primary" onClick={addToast}>Report</CButton>{' '}
+                <CButton color="primary" onClick={saveReport}>Report</CButton>{' '}
                 <CButton 
                   color="secondary" 
                   onClick={() => setReport(false)}
                 >Cancel</CButton>
               </CModalFooter>
-              {Object.keys(toasters).map((toasterKey) => (
-                <CToaster
-                  position='top-center'
-                  key={'toaster' + toasterKey}
-                >
-                  {
-                    toasters[toasterKey].map((toast, key)=>{
-                    return(
-                      <CToast
-                        key={'toast' + key}
-                        show={true}
-                        autohide={toast.autohide}
-                        fade={toast.fade}
-                      >
-                        <CToastHeader closeButton={toast.closeButton}>
-                          Confirmation
-                        </CToastHeader>
-                        <CToastBody>
-                          {`Your report has been received and will be reviewed by our support staff soon`}
-                        </CToastBody>
-                      </CToast>
-                    )
-                  })
-                  }
-                </CToaster>
-              ))}
+              
             </CModal>
         </CCardBody>
       </CCard>
