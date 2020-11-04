@@ -58,9 +58,10 @@ const [value, setValue] = useState(2);
 
 const [editProject, setEditProject] = useState(false)
 const [endProject, setEndProject] = useState(false)
+const [startProject, setStartProject] = useState(false)
 const [achievement, setAchievement] = useState(false)
 const [flag, setFlag] = useState(false)
-const [buttonColor, setButtonColor] = useState(["info", "danger", "secondary"])
+const [buttonColor, setButtonColor] = useState(["info", "danger", "secondary","success"])
 const [feedback, setFeedback] = useState(false)
 const [post, setPost] = useState(false)
 const [postTitle, setPostTitle] = useState(false)
@@ -73,7 +74,7 @@ const [projectTitle, setProjectTitle] = useState("CS3203 Software Engineering Pr
 const [projectType, setProjectType] = useState('Module Project');
 const [projectIdentifier, setProjectIdentifier] = useState('CS3203');
 const [vacancy, setVacancy] = useState('4/5');
-const [status, setStatus] = useState("ONGOING");
+const [status, setStatus] = useState("OPEN");
 const [description, setDescription] = useState('Hi Guys, this is team Software Engineering Master from CS3203.');
 const [rejectRequestModal, setRejectRequestModal] = useState(false);
 const [selectedRequestId, setSelectedRequestId] = useState(-1);
@@ -144,6 +145,13 @@ const achievementModal = () =>{
   setStatus("CLOSED")
   setFlag(true)
   setButtonColor(["secondary", "secondary", "success"])
+}
+
+const startProj= ()=>{
+  setStatus("ONGOING")
+  setStartProject(!startProject)
+  setToastMessage('Project is started successfully!');
+  addToast();
 }
 
 const leaveFeedback = () => {
@@ -258,11 +266,45 @@ const toasters = (() => {
                                 </CButton>
                               </CCol>
                               <CCol col="6">
-                              <CButton variant="outline" block color={buttonColor[1]} disabled={flag} onClick={() => setEndProject(!endProject)}>
+                              {
+                                status === 'ONGOING' ?
+                                <CButton variant="outline" block color={buttonColor[1]} disabled={flag} onClick={() => setEndProject(!endProject)}>
                                     End Project
                                 </CButton>
+                                :
+                                <CButton variant="outline" block color={buttonColor[3]} disabled={flag} onClick={() => setStartProject(!startProject)}>
+                                    Start Project
+                                </CButton>
+                              }
+                              
                               </CCol>
                           </CRow>
+                          <CModal 
+                            show={startProject} 
+                            onClose={() => setStartProject(!startProject)}
+                            >
+                            <CModalHeader closeButton>
+                                <CModalTitle>Start Project</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                            <CForm>
+                              <CFormGroup>
+                                <CLabel>Are you sure to start this project?</CLabel>
+                                </CFormGroup>
+                                <CFormGroup>
+                                <CLabel>Notice that this action is irreversible.</CLabel>
+                              </CFormGroup>
+                            </CForm>
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton color="secondary" onClick={() => setStartProject(!startProject)}>
+                                Cancel
+                                </CButton>
+                                <CButton color="primary" onClick={startProj}>
+                                Start
+                                </CButton>{' '}
+                            </CModalFooter>
+                          </CModal> 
                           <CModal 
                             show={endProject} 
                             onClose={() => setEndProject(!endProject)}
