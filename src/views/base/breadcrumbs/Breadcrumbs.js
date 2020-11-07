@@ -20,11 +20,11 @@ const Breadcrumbs = () => {
         <CCard>
           <CCardHeader>
             Bootstrap Breadcrumb
-            <DocsLink name="CBreadcrumb"/>
+            <DocsLink name="CBreadcrumb" />
           </CCardHeader>
           <CCardBody>
             <h6>CBreadcrumbRouter wrapper component</h6>
-            <CBreadcrumbRouter routes={routes}/>
+            <CBreadcrumbRouter routes={routes} />
             <h6>Manual</h6>
             <CBreadcrumb>
               <CBreadcrumbItem>

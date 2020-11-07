@@ -34,7 +34,6 @@ import {
 
 import { useHistory } from 'react-router-dom';
 
-
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 
 const ongoingProjects = [
@@ -78,6 +77,8 @@ const Dashboard = () => {
   const [projectType, setProjectType] = useState('Module Project');
   const [projectIdentifier, setProjectIdentifier] = useState('');
   const [teamSize, setTeamSize] = useState('');
+  const [skills, setSkills] = useState('');
+  const [deadline, setDeadline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState(-1);
 
@@ -95,6 +96,14 @@ const Dashboard = () => {
 
   const handleTeamSizeChange = (event) => {
     setTeamSize(event.target.value);
+  }
+
+  const handleSkillsChange = (event) => {
+    setSkills(event.target.value);
+  }
+
+  const handleDeadlineChange = (event) => {
+    setDeadline(event.target.value);
   }
 
   const handleDescriptionChange = (event) => {
@@ -383,6 +392,15 @@ const Dashboard = () => {
                 </CFormGroup>
               </CCol>
             </CRow>
+            <CFormGroup>
+              <CLabel>Skill Requirement</CLabel>
+              <CTextarea placeholder="JavaScript, Java, Python" onChange={handleSkillsChange}></CTextarea>
+            </CFormGroup>
+
+            <CFormGroup>
+              <CLabel>Application Deadline</CLabel>
+              <CInput type="date" id="date-input" name="date-input" placeholder="date" onChange={handleDeadlineChange} />
+            </CFormGroup>
 
             <CFormGroup>
               <CLabel>Description</CLabel>
