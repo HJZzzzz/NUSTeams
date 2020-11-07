@@ -6,8 +6,9 @@ import {
     CRow,
     CCol,
     CBadge,
-    CLink
+    CLink,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import { useHistory } from 'react-router-dom';
 
 const ViewMyProjects = () => {
@@ -25,11 +26,12 @@ const ViewMyProjects = () => {
                             <CLink onClick={pageChangeMyProject}>
                                 <h5>CS3203 Software Engineering Project</h5>
                             </CLink>
-                            <CBadge color={'warning'}>ONGOING</CBadge>
+                            <CBadge color={'success'}>OPEN</CBadge>
                         </CCardHeader>
                         <CCardBody>
                             <p>Module Project: CS3203</p>
                             <p>Started from 1 Jan 2020</p>
+                            <CIcon name="cil-bell" style={{ color: "#FC7B28" }} /> <span style={{ color: "#FC7B28" }} >You have pending requests to join this project</span>
                         </CCardBody>
                     </CCard>
                 </CCol>
