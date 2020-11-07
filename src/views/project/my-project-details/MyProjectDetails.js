@@ -75,6 +75,8 @@ const [projectType, setProjectType] = useState('Module Project');
 const [projectIdentifier, setProjectIdentifier] = useState('CS3203');
 const [vacancy, setVacancy] = useState('4/5');
 const [status, setStatus] = useState("OPEN");
+const [skills, setSkills] = useState("JavaScript, Java, Python");
+const [deadline, setDeadline] = useState("2020-11-30");
 const [description, setDescription] = useState('Hi Guys, this is team Software Engineering Master from CS3203.');
 const [rejectRequestModal, setRejectRequestModal] = useState(false);
 const [selectedRequestId, setSelectedRequestId] = useState(-1);
@@ -121,6 +123,14 @@ const handleProjectIdentifierChange = (event) => {
 
 const handleVacancyChange = (event) => {
   setVacancy(event.target.value);
+}
+
+const handleSkillsChange =(event) => {
+  setSkills(event.target.value);
+}
+
+const handleDeadlineChange =(event) => {
+  setDeadline(event.target.value);
 }
 
 const handleDescriptionChange = (event) => {
@@ -385,7 +395,7 @@ const toasters = (() => {
                                 <CCol sm='6' md='6'>
                                   <CFormGroup>
                                     <CLabel>Project Identifier</CLabel>
-                                    <CInput type="text" defaultValue={projectType} autoComplete="projectId" onChange={handleProjectIdentifierChange} />
+                                    <CInput type="text" defaultValue={projectIdentifier} autoComplete="projectId" onChange={handleProjectIdentifierChange} />
                                   </CFormGroup>
                                 </CCol>
                                 <CCol sm='6' md='6'>
@@ -395,6 +405,14 @@ const toasters = (() => {
                                   </CFormGroup>
                                 </CCol>
                               </CRow>
+                              <CFormGroup>
+                                <CLabel>Skill Requirement</CLabel>
+                                <CTextarea defaultValue={skills} onChange={handleSkillsChange}></CTextarea>
+                              </CFormGroup>
+                              <CFormGroup>
+                                <CLabel>Application Deadline</CLabel>
+                                <CInput type="date" id="date-input" name="date-input" placeholder="date" onChange={handleDeadlineChange}/>
+                              </CFormGroup>
                               <CFormGroup>
                                 <CLabel>Description</CLabel>
                                 <CTextarea defaultValue={description} onChange={handleDescriptionChange}></CTextarea>
@@ -425,8 +443,10 @@ const toasters = (() => {
                           </h1></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Project Type:</span>     {projectType}</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Module Code:</span>     {projectIdentifier}</p></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Skill Requirement:</span>     {skills}</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Vacancy:</span>     {vacancy}</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Status:     </span><CBadge className="mr-1" shape="pill" color={getBadge(status)}><span style={{color:"white"}}>{status}</span></CBadge></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Application Deadline:</span>     {deadline}</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Description:     </span>{description}</CListGroupItem>
                     </CListGroup>
                     
