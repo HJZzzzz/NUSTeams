@@ -100,8 +100,8 @@ const UserProfile = () => {
   const [closeButton] = useState(true)
   const [fade] = useState(true)
 
-  const [showCard, setShowCard] = useState(true)
-  const [showTech, setShowTech] = useState(true)
+  // const [showCard, setShowCard] = useState(true)
+  // const [showTech, setShowTech] = useState(true)
   const [showNewTech, setShowNewTech] = useState(false)
   // const [post, setPost] = useState(false)
   const [showJava, setShowJava] = useState(true)
@@ -119,7 +119,7 @@ const UserProfile = () => {
   const [showSaveHiphop, setShowSaveHiphop] = useState(true)
   const [showSavePiano, setShowSavePiano] = useState(true)
 
-  const [post, setPost] = useState(false)
+  // const [post, setPost] = useState(false)
   const [toastMessage, setToastMessage] = useState('');
 
   const addToast = () => {
@@ -145,13 +145,13 @@ const UserProfile = () => {
   //   setShowCard(true)
   // }
 
-  const updateCard = () => {
-    setShowCard(false)
-  }
+  // const updateCard = () => {
+  //   setShowCard(false)
+  // }
 
-  const updateTech = () => {
-    setShowTech(false)
-  }
+  // const updateTech = () => {
+  //   setShowTech(false)
+  // }
 
   const updateJava = () => {
     setShowJava(false)
