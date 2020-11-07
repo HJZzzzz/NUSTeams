@@ -34,7 +34,6 @@ import {
 
 import { useHistory } from 'react-router-dom';
 
-
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 
 const ongoingProjects = [
@@ -99,11 +98,11 @@ const Dashboard = () => {
     setTeamSize(event.target.value);
   }
 
-  const handleSkillsChange =(event) => {
+  const handleSkillsChange = (event) => {
     setSkills(event.target.value);
   }
 
-  const handleDeadlineChange =(event) => {
+  const handleDeadlineChange = (event) => {
     setDeadline(event.target.value);
   }
 
@@ -400,7 +399,7 @@ const Dashboard = () => {
 
             <CFormGroup>
               <CLabel>Application Deadline</CLabel>
-              <CInput type="date" id="date-input" name="date-input" placeholder="date" onChange={handleDeadlineChange}/>
+              <CInput type="date" id="date-input" name="date-input" placeholder="date" onChange={handleDeadlineChange} />
             </CFormGroup>
 
             <CFormGroup>
