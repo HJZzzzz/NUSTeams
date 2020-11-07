@@ -44,9 +44,9 @@ import CIcon from '@coreui/icons-react'
 // import photo from '../../../assets/img/project.jpg'
 
 let inbox = [
-    { id: 4, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Tom Cruise has invited you to join his project: IS4103 Capstone Project' },
-    { id: 5, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'Matt Damon has invited you to join his project: CS3240 Design Project' },
-    { id: 6, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Sam Smith has invited you to join his project: IS3106 Final Project' },
+    { id: 4, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Hey! May I join your team?' },
+    { id: 5, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'I am a Year 3 CS student with iternship expereience, please let me join your team' },
+    { id: 6, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Want to join your guys! Any details can connect me to confirm!' },
   ]
   
   
