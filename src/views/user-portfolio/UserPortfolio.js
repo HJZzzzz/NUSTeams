@@ -218,6 +218,14 @@ const UserPortfolio = () => {
                     </CFormGroup>
                     <CFormGroup row>
                       <CCol md="4">
+                        <CLabel><strong>Title</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Frontend Developer</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
                         <CLabel><strong>Bio</strong></CLabel>
                       </CCol>
                       <CCol xs="12" md="7">
