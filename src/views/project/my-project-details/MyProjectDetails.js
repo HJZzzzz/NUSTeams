@@ -58,9 +58,10 @@ const [value, setValue] = useState(2);
 
 const [editProject, setEditProject] = useState(false)
 const [endProject, setEndProject] = useState(false)
+const [startProject, setStartProject] = useState(false)
 const [achievement, setAchievement] = useState(false)
 const [flag, setFlag] = useState(false)
-const [buttonColor, setButtonColor] = useState(["info", "danger", "secondary"])
+const [buttonColor, setButtonColor] = useState(["info", "danger", "secondary","success"])
 const [feedback, setFeedback] = useState(false)
 const [post, setPost] = useState(false)
 const [postTitle, setPostTitle] = useState(false)
@@ -73,7 +74,9 @@ const [projectTitle, setProjectTitle] = useState("CS3203 Software Engineering Pr
 const [projectType, setProjectType] = useState('Module Project');
 const [projectIdentifier, setProjectIdentifier] = useState('CS3203');
 const [vacancy, setVacancy] = useState('4/5');
-const [status, setStatus] = useState("ONGOING");
+const [status, setStatus] = useState("OPEN");
+const [skills, setSkills] = useState("JavaScript, Java, Python");
+const [deadline, setDeadline] = useState("2020-11-30");
 const [description, setDescription] = useState('Hi Guys, this is team Software Engineering Master from CS3203.');
 const [rejectRequestModal, setRejectRequestModal] = useState(false);
 const [selectedRequestId, setSelectedRequestId] = useState(-1);
@@ -122,6 +125,14 @@ const handleVacancyChange = (event) => {
   setVacancy(event.target.value);
 }
 
+const handleSkillsChange =(event) => {
+  setSkills(event.target.value);
+}
+
+const handleDeadlineChange =(event) => {
+  setDeadline(event.target.value);
+}
+
 const handleDescriptionChange = (event) => {
   setDescription(event.target.value);
 }
@@ -144,6 +155,13 @@ const achievementModal = () =>{
   setStatus("CLOSED")
   setFlag(true)
   setButtonColor(["secondary", "secondary", "success"])
+}
+
+const startProj= ()=>{
+  setStatus("ONGOING")
+  setStartProject(!startProject)
+  setToastMessage('Project is started successfully!');
+  addToast();
 }
 
 const leaveFeedback = () => {
@@ -258,11 +276,45 @@ const toasters = (() => {
                                 </CButton>
                               </CCol>
                               <CCol col="6">
-                              <CButton variant="outline" block color={buttonColor[1]} disabled={flag} onClick={() => setEndProject(!endProject)}>
+                              {
+                                status === 'ONGOING' ?
+                                <CButton variant="outline" block color={buttonColor[1]} disabled={flag} onClick={() => setEndProject(!endProject)}>
                                     End Project
                                 </CButton>
+                                :
+                                <CButton variant="outline" block color={buttonColor[3]} disabled={flag} onClick={() => setStartProject(!startProject)}>
+                                    Start Project
+                                </CButton>
+                              }
+                              
                               </CCol>
                           </CRow>
+                          <CModal 
+                            show={startProject} 
+                            onClose={() => setStartProject(!startProject)}
+                            >
+                            <CModalHeader closeButton>
+                                <CModalTitle>Start Project</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                            <CForm>
+                              <CFormGroup>
+                                <CLabel>Are you sure to start this project?</CLabel>
+                                </CFormGroup>
+                                <CFormGroup>
+                                <CLabel>Notice that this action is irreversible.</CLabel>
+                              </CFormGroup>
+                            </CForm>
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton color="secondary" onClick={() => setStartProject(!startProject)}>
+                                Cancel
+                                </CButton>
+                                <CButton color="primary" onClick={startProj}>
+                                Start
+                                </CButton>{' '}
+                            </CModalFooter>
+                          </CModal> 
                           <CModal 
                             show={endProject} 
                             onClose={() => setEndProject(!endProject)}
@@ -343,7 +395,7 @@ const toasters = (() => {
                                 <CCol sm='6' md='6'>
                                   <CFormGroup>
                                     <CLabel>Project Identifier</CLabel>
-                                    <CInput type="text" defaultValue={projectType} autoComplete="projectId" onChange={handleProjectIdentifierChange} />
+                                    <CInput type="text" defaultValue={projectIdentifier} autoComplete="projectId" onChange={handleProjectIdentifierChange} />
                                   </CFormGroup>
                                 </CCol>
                                 <CCol sm='6' md='6'>
@@ -353,6 +405,14 @@ const toasters = (() => {
                                   </CFormGroup>
                                 </CCol>
                               </CRow>
+                              <CFormGroup>
+                                <CLabel>Skill Requirement</CLabel>
+                                <CTextarea defaultValue={skills} onChange={handleSkillsChange}></CTextarea>
+                              </CFormGroup>
+                              <CFormGroup>
+                                <CLabel>Application Deadline</CLabel>
+                                <CInput type="date" id="date-input" name="date-input" placeholder="date" onChange={handleDeadlineChange}/>
+                              </CFormGroup>
                               <CFormGroup>
                                 <CLabel>Description</CLabel>
                                 <CTextarea defaultValue={description} onChange={handleDescriptionChange}></CTextarea>
@@ -383,8 +443,10 @@ const toasters = (() => {
                           </h1></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Project Type:</span>     {projectType}</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Module Code:</span>     {projectIdentifier}</p></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Skill Requirement:</span>     {skills}</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Vacancy:</span>     {vacancy}</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Status:     </span><CBadge className="mr-1" shape="pill" color={getBadge(status)}><span style={{color:"white"}}>{status}</span></CBadge></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Application Deadline:</span>     {deadline}</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Description:     </span>{description}</CListGroupItem>
                     </CListGroup>
                     

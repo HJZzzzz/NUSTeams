@@ -114,8 +114,10 @@ class ProjectDetails extends Component {
                           </h1></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Project Type:</span>     Module Project</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Module Code:</span>     CS3240</p></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Skill Requirement:</span>     JavaScript, Java, Python</p></CListGroupItem>
                       <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Vacancy:</span>     4/5</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Status:     </span><CBadge className="mr-1" color="success" shape="pill">OPEN</CBadge></CListGroupItem>
+                      <CListGroupItem><p style={{margin:"10px"}}><span style={{color:"gray"}} >Application Deadline:</span>     2020-11-30</p></CListGroupItem>
                       <CListGroupItem style={{paddingLeft:"30px",paddingTop:"30px",paddingBottom:"20px",paddingTop:"20px"}}><span style={{color:"gray"}} >Description:     </span>Hi Guys, this is team DB Master from CS2102, we are currently looking for two more students who are interested in database implementition and web development! Feell free to send your request!</CListGroupItem>
                     </CListGroup>
                     
