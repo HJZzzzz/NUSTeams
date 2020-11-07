@@ -355,7 +355,7 @@ const MyProjectDetails = () => {
                         align: 'center'
                       }}
                     />
-                    <p class="h1">Achievement Unlocked!</p>
+                    <h1>Achievement Unlocked!</h1>
                     <p>For leading & completing 10 projects</p>
                     <h2 class="text-success">Boss</h2>
                     <p>You are a person of focus, commitment and sheer will</p>
