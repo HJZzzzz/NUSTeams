@@ -15,6 +15,7 @@ const ViewUsers = () => {
       name: "John Doe",
       year: "1",
       major: "Chemistry",
+      title: "Chemist",
       rating: "4.0",
     },
     {
@@ -23,6 +24,7 @@ const ViewUsers = () => {
       name: "Samppa Nori",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -31,6 +33,7 @@ const ViewUsers = () => {
       name: "Estavan Lykos",
       year: "2",
       major: "Business Analytics",
+      title: "Data Scientist",
       rating: "4.0",
     },
     {
@@ -39,6 +42,7 @@ const ViewUsers = () => {
       name: "Chetan Mohamed",
       year: "2",
       major: "Civil Engineering",
+      title: "Civil engineer",
       rating: "3.8",
     },
     {
@@ -47,6 +51,7 @@ const ViewUsers = () => {
       name: "Derick Maximinus",
       year: "3",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -55,6 +60,7 @@ const ViewUsers = () => {
       name: "Friderik Dávid",
       year: "4",
       major: "Business Analytics",
+      title: "Data Scientist",
       rating: "3.9",
     },
     {
@@ -63,6 +69,7 @@ const ViewUsers = () => {
       name: "Yiorgos Avraamu",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -71,6 +78,7 @@ const ViewUsers = () => {
       name: "Avram Tarasios",
       year: "2",
       major: "Business Analytics",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -79,6 +87,7 @@ const ViewUsers = () => {
       name: "Quintin Ed",
       year: "2",
       major: "Civil Engineering",
+      title: "Civil Engineer",
       rating: "3.8",
     },
     {
@@ -87,6 +96,7 @@ const ViewUsers = () => {
       name: "Enéas Kwadwo",
       year: "3",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -95,6 +105,7 @@ const ViewUsers = () => {
       name: "Agapetus Tadeáš",
       year: "4",
       major: "Business Analytics",
+      title: "Data Scientist",
       rating: "3.9",
     },
     {
@@ -103,6 +114,7 @@ const ViewUsers = () => {
       name: "Carwyn Fachtna",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -111,6 +123,7 @@ const ViewUsers = () => {
       name: "Nehemiah Tatius",
       year: "2",
       major: "Business Analytics",
+      title: "Data Scientist",
       rating: "4.0",
     },
     {
@@ -119,6 +132,7 @@ const ViewUsers = () => {
       name: "Ebbe Gemariah",
       year: "2",
       major: "Civil Engineering",
+      title: "Civil Engineer",
       rating: "3.8",
     },
     {
@@ -127,6 +141,7 @@ const ViewUsers = () => {
       name: "Eustorgios Amulius",
       year: "3",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -135,6 +150,7 @@ const ViewUsers = () => {
       name: "Leopold Gáspár",
       year: "4",
       major: "Business Analytics",
+      title: "Data Scientist",
       rating: "3.9",
     },
     {
@@ -143,6 +159,7 @@ const ViewUsers = () => {
       name: "Pompeius René",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -151,6 +168,7 @@ const ViewUsers = () => {
       name: "Paĉjo Jadon",
       year: "2",
       major: "Business Analytics",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -159,6 +177,7 @@ const ViewUsers = () => {
       name: "Micheal Mercurius",
       year: "2",
       major: "Civil Engineering",
+      title: "Civil Engineering",
       rating: "3.8",
     },
     {
@@ -167,6 +186,7 @@ const ViewUsers = () => {
       name: "Ganesha Dubhghall",
       year: "3",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -175,6 +195,7 @@ const ViewUsers = () => {
       name: "Hiroto Šimun",
       year: "4",
       major: "Business Analytics",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -183,6 +204,7 @@ const ViewUsers = () => {
       name: "Vishnu Serghei",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "3.9",
     },
     {
@@ -191,6 +213,7 @@ const ViewUsers = () => {
       name: "Zbyněk Phoibos",
       year: "2",
       major: "Business Analytics",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
     {
@@ -199,6 +222,7 @@ const ViewUsers = () => {
       name: "Aulus Agmundr",
       year: "1",
       major: "Information Systems",
+      title: "Full Stack Developer",
       rating: "4.0",
     },
   ];
@@ -210,9 +234,10 @@ const ViewUsers = () => {
       sorter: false,
       filter: false,
     },
-    { key: "name", _style: { width: "20%" } },
-    { key: "rating", _style: { width: "15%" } },
-    { key: "major", _style: { width: "25%" } },
+    { key: "name", _style: { width: "15%" } },
+    { key: "title", _style: { width: "15%" } },
+    { key: "rating", _style: { width: "10%" } },
+    { key: "major", _style: { width: "20%" } },
     { key: "year", _style: { width: "15%" } },
     {
       key: "action",
