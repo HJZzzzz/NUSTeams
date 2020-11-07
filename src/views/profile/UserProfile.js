@@ -16,7 +16,6 @@ import {
   CProgressBar,
   CCollapse,
   CWidgetProgress,
-  CWidgetBrand,
   CWidgetIcon,
   CWidgetProgressIcon,
   CWidgetSimple,
@@ -42,19 +41,8 @@ import {
   CAlert,
   CInputRadio,
   CFade,
-  CLink
 } from '@coreui/react'
-import {
-  CChartBar,
-  CChartLine,
-  CChartDoughnut,
-  CChartRadar,
-  CChartPie,
-  CChartPolarArea
-} from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
-import ChartLineSimple from '../charts/ChartLineSimple'
 // import "@coreui/coreui/css/custom"
 import usersData from './projectData'
 

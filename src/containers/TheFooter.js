@@ -5,7 +5,6 @@ const TheFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <a href="" target="_blank" rel="noopener noreferrer">NUSTeams</a>
         <span className="ml-1">&copy; 2020 NUSTeams.</span>
       </div>
     </CFooter>

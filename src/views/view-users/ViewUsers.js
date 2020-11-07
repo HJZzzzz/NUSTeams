@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom'
 import {
   CCardBody,
@@ -11,7 +11,7 @@ const ViewUsers = () => {
   const usersData = [
     {
       id: 0,
-      pic: 'avatars/1.jpg', 
+      pic: 'avatars/1.jpg',
       name: "John Doe",
       year: "1",
       major: "Chemistry",
@@ -19,7 +19,7 @@ const ViewUsers = () => {
     },
     {
       id: 1,
-      pic: 'avatars/2.jpg', 
+      pic: 'avatars/2.jpg',
       name: "Samppa Nori",
       year: "1",
       major: "Information Systems",
@@ -27,7 +27,7 @@ const ViewUsers = () => {
     },
     {
       id: 2,
-      pic: 'avatars/3.jpg', 
+      pic: 'avatars/3.jpg',
       name: "Estavan Lykos",
       year: "2",
       major: "Business Analytics",
@@ -35,7 +35,7 @@ const ViewUsers = () => {
     },
     {
       id: 3,
-      pic: 'avatars/4.jpg', 
+      pic: 'avatars/4.jpg',
       name: "Chetan Mohamed",
       year: "2",
       major: "Civil Engineering",
@@ -43,7 +43,7 @@ const ViewUsers = () => {
     },
     {
       id: 4,
-      pic: 'avatars/5.jpg', 
+      pic: 'avatars/5.jpg',
       name: "Derick Maximinus",
       year: "3",
       major: "Information Systems",
@@ -51,7 +51,7 @@ const ViewUsers = () => {
     },
     {
       id: 5,
-      pic: 'avatars/6.jpg', 
+      pic: 'avatars/6.jpg',
       name: "Friderik Dávid",
       year: "4",
       major: "Business Analytics",
@@ -59,7 +59,7 @@ const ViewUsers = () => {
     },
     {
       id: 6,
-      pic: 'avatars/7.jpg', 
+      pic: 'avatars/7.jpg',
       name: "Yiorgos Avraamu",
       year: "1",
       major: "Information Systems",
@@ -67,7 +67,7 @@ const ViewUsers = () => {
     },
     {
       id: 7,
-      pic: 'avatars/8.jpg', 
+      pic: 'avatars/8.jpg',
       name: "Avram Tarasios",
       year: "2",
       major: "Business Analytics",
@@ -75,7 +75,7 @@ const ViewUsers = () => {
     },
     {
       id: 8,
-      pic: 'avatars/1.jpg', 
+      pic: 'avatars/1.jpg',
       name: "Quintin Ed",
       year: "2",
       major: "Civil Engineering",
@@ -83,7 +83,7 @@ const ViewUsers = () => {
     },
     {
       id: 9,
-      pic: 'avatars/2.jpg', 
+      pic: 'avatars/2.jpg',
       name: "Enéas Kwadwo",
       year: "3",
       major: "Information Systems",
@@ -91,7 +91,7 @@ const ViewUsers = () => {
     },
     {
       id: 10,
-      pic: 'avatars/3.jpg', 
+      pic: 'avatars/3.jpg',
       name: "Agapetus Tadeáš",
       year: "4",
       major: "Business Analytics",
@@ -99,7 +99,7 @@ const ViewUsers = () => {
     },
     {
       id: 11,
-      pic: 'avatars/4.jpg', 
+      pic: 'avatars/4.jpg',
       name: "Carwyn Fachtna",
       year: "1",
       major: "Information Systems",
@@ -107,7 +107,7 @@ const ViewUsers = () => {
     },
     {
       id: 12,
-      pic: 'avatars/5.jpg', 
+      pic: 'avatars/5.jpg',
       name: "Nehemiah Tatius",
       year: "2",
       major: "Business Analytics",
@@ -115,7 +115,7 @@ const ViewUsers = () => {
     },
     {
       id: 13,
-      pic: 'avatars/6.jpg', 
+      pic: 'avatars/6.jpg',
       name: "Ebbe Gemariah",
       year: "2",
       major: "Civil Engineering",
@@ -123,7 +123,7 @@ const ViewUsers = () => {
     },
     {
       id: 14,
-      pic: 'avatars/7.jpg', 
+      pic: 'avatars/7.jpg',
       name: "Eustorgios Amulius",
       year: "3",
       major: "Information Systems",
@@ -131,7 +131,7 @@ const ViewUsers = () => {
     },
     {
       id: 15,
-      pic: 'avatars/8.jpg', 
+      pic: 'avatars/8.jpg',
       name: "Leopold Gáspár",
       year: "4",
       major: "Business Analytics",
@@ -139,7 +139,7 @@ const ViewUsers = () => {
     },
     {
       id: 16,
-      pic: 'avatars/1.jpg', 
+      pic: 'avatars/1.jpg',
       name: "Pompeius René",
       year: "1",
       major: "Information Systems",
@@ -147,7 +147,7 @@ const ViewUsers = () => {
     },
     {
       id: 17,
-      pic: 'avatars/2.jpg', 
+      pic: 'avatars/2.jpg',
       name: "Paĉjo Jadon",
       year: "2",
       major: "Business Analytics",
@@ -155,7 +155,7 @@ const ViewUsers = () => {
     },
     {
       id: 18,
-      pic: 'avatars/3.jpg', 
+      pic: 'avatars/3.jpg',
       name: "Micheal Mercurius",
       year: "2",
       major: "Civil Engineering",
@@ -163,7 +163,7 @@ const ViewUsers = () => {
     },
     {
       id: 19,
-      pic: 'avatars/4.jpg', 
+      pic: 'avatars/4.jpg',
       name: "Ganesha Dubhghall",
       year: "3",
       major: "Information Systems",
@@ -171,7 +171,7 @@ const ViewUsers = () => {
     },
     {
       id: 20,
-      pic: 'avatars/5.jpg', 
+      pic: 'avatars/5.jpg',
       name: "Hiroto Šimun",
       year: "4",
       major: "Business Analytics",
@@ -179,7 +179,7 @@ const ViewUsers = () => {
     },
     {
       id: 21,
-      pic: 'avatars/6.jpg', 
+      pic: 'avatars/6.jpg',
       name: "Vishnu Serghei",
       year: "1",
       major: "Information Systems",
@@ -187,7 +187,7 @@ const ViewUsers = () => {
     },
     {
       id: 22,
-      pic: 'avatars/7.jpg', 
+      pic: 'avatars/7.jpg',
       name: "Zbyněk Phoibos",
       year: "2",
       major: "Business Analytics",
@@ -195,7 +195,7 @@ const ViewUsers = () => {
     },
     {
       id: 23,
-      pic: 'avatars/8.jpg', 
+      pic: 'avatars/8.jpg',
       name: "Aulus Agmundr",
       year: "1",
       major: "Information Systems",
@@ -205,13 +205,13 @@ const ViewUsers = () => {
 
   const fields = [
     {
-      key:"pic",
+      key: "pic",
       label: "",
       sorter: false,
       filter: false,
     },
     { key: "name", _style: { width: "20%" } },
-    { key: "rating",_style: { width: "15%" } },
+    { key: "rating", _style: { width: "15%" } },
     { key: "major", _style: { width: "25%" } },
     { key: "year", _style: { width: "15%" } },
     {
@@ -234,7 +234,7 @@ const ViewUsers = () => {
           columnFilter
           items={usersData}
           fields={fields}
-          tableFilter={{label: "Search:", placeholder: "Type any keyword"}}      
+          tableFilter={{ label: "Search:", placeholder: "Type any keyword" }}
           itemsPerPageSelect
           itemsPerPage={5}
           hover
@@ -242,18 +242,18 @@ const ViewUsers = () => {
           pagination
           scopedSlots={{
             'pic':
-                (item) => (
-                  <td className="text-center">
-                    <div className="c-avatar">
-                      <img src={item.pic} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                      <span className="c-avatar-status bg-danger"></span>
-                    </div>
-                  </td>
-                ),
+              (item) => (
+                <td className="text-center">
+                  <div className="c-avatar">
+                    <img src={item.pic} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                    <span className="c-avatar-status bg-danger"></span>
+                  </div>
+                </td>
+              ),
             'action': (item) => {
               return (
                 <td className="py-2">
-                  <CButton size="sm" color="info" onClick={pageChange}>VIEW PROFILE</CButton>     
+                  <CButton size="sm" color="info" onClick={pageChange}>VIEW PROFILE</CButton>
                 </td>
               );
             },

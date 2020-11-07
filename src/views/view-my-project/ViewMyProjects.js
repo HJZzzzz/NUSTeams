@@ -26,7 +26,7 @@ const ViewMyProjects = () => {
                             <CLink onClick={pageChangeMyProject}>
                                 <h5>CS3203 Software Engineering Project</h5>
                             </CLink>
-                            <CBadge color={'success'}>OPEN</CBadge>
+                            <CBadge color={'warning'}>ONGOING</CBadge>
                         </CCardHeader>
                         <CCardBody>
                             <p>Module Project: CS3203</p>
