@@ -112,6 +112,21 @@ const UserProfile = () => {
   const [showCard, setShowCard] = useState(true)
   const [showTech, setShowTech] = useState(true)
   const [showNewTech, setShowNewTech] = useState(false)
+  const [showJava, setShowJava] = useState(true)
+  const [showJavaScript, setShowJavaScript] = useState(true)
+  const [showComm, setShowComm] = useState(true)
+  const [showLeadership, setShowLeadership] = useState(true)
+  const [showHiphop, setShowHiphop] = useState(true)
+  const [showPiano, setShowPiano] = useState(true)
+
+  const [showSaveNewTech, setShowSaveNewTech] = useState(false)
+  const [showSaveJava, setShowSaveJava] = useState(true)
+  const [showSaveJavaScript, setShowSaveJavaScript] = useState(true)
+  const [showSaveComm, setShowSaveComm] = useState(true)
+  const [showSaveLeadership, setShowSaveLeadership] = useState(true)
+  const [showSaveHiphop, setShowSaveHiphop] = useState(true)
+  const [showSavePiano, setShowSavePiano] = useState(true)
+
   const [post, setPost] = useState(false)
   const [toastMessage, setToastMessage] = useState('');
 
@@ -146,6 +161,30 @@ const UserProfile = () => {
     setShowTech(false)
   }
 
+  const updateJava = () => {
+    setShowJava(false)
+  }
+
+  const updateJavaScript = () => {
+    setShowJavaScript(false)
+  }
+
+  const updateComm = () => {
+    setShowComm(false)
+  }
+
+  const updateLeadership = () => {
+    setShowLeadership(false)
+  }
+
+  const updateHiphop = () => {
+    setShowHiphop(false)
+  }
+
+  const updatePiano = () => {
+    setShowPiano(false)
+  }
+
   const updateNewTech = () => {
     setShowNewTech(true)
   }
@@ -154,7 +193,28 @@ const UserProfile = () => {
     setSkill(!editSkill)
     setToastMessage('Your skills have been updated');
     addToast();
+
+    setShowSaveNewTech(showNewTech);
+    setShowSaveJava(showJava);
+    setShowSaveJavaScript(showJavaScript);
+    setShowSaveComm(showComm);
+    setShowSaveLeadership(showLeadership);
+    setShowSaveHiphop(showHiphop);
+    setShowSavePiano(showPiano);
   }
+
+  const cancelSkills = () => {
+    setSkill(!editSkill)
+
+    setShowNewTech(showSaveNewTech);
+    setShowJava(showSaveJava);
+    setShowJavaScript(showSaveJavaScript);
+    setShowComm(showSaveComm);
+    setShowLeadership(showSaveLeadership);
+    setShowHiphop(showSaveHiphop);
+    setShowPiano(showSavePiano);
+  }
+
 
   const saveReport = () => {
     setReport(!report)
@@ -232,6 +292,14 @@ const UserProfile = () => {
                       </CCol>
                       <CCol xs="12" md="7">
                         <p className="form-control-static">Computer Science, Year 4</p>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="4">
+                        <CLabel><strong>Title</strong></CLabel>
+                      </CCol>
+                      <CCol xs="12" md="7">
+                        <p className="form-control-static">Frontend Developer</p>
                       </CCol>
                     </CFormGroup>
                     <CFormGroup row>
@@ -318,6 +386,19 @@ const UserProfile = () => {
                           <option value="2">2018/19 Semester 1</option>
                           <option value="3">2018/19 Semester 2</option>
                         </CSelect>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="3">
+                        <CLabel htmlFor="textarea-input">Title</CLabel>
+                      </CCol>
+                      <CCol xs="12" md="9">
+                        <CTextarea 
+                          name="textarea-input" 
+                          id="textarea-input" 
+                          rows="1"
+                          placeholder="Frontend Developer" 
+                        />
                       </CCol>
                     </CFormGroup>
                     <CFormGroup row>
@@ -445,17 +526,19 @@ const UserProfile = () => {
                     <CCardBody>
                       <CRow>
                         <CCol>
+                        <CFade in={showSaveJava} unmountOnExit={true}>
                           <CWidgetIcon text="Endorsed By Ruichun and 10 others" header="Java" color="info" iconPadding={false}>
                             <CIcon width={24} name="cil-check" />
                           </CWidgetIcon>
+                          </CFade> 
                         </CCol>
                         <CCol>
-                          <CFade in={showTech} unmountOnExit={true}>
+                          <CFade in={showSaveJavaScript} unmountOnExit={true}>
                             <CWidgetIcon text="Endorsed By Shengjing and 10 others" header="JavaScript" color="info" iconPadding={false}>
                               <CIcon width={24} name="cil-check" />
                             </CWidgetIcon>
                           </CFade>
-                          <CFade in={showNewTech} unmountOnExit={true}>
+                          <CFade in={showSaveNewTech} unmountOnExit={true}>
                             <CWidgetIcon header="php" color="info" iconPadding={false}>
                               <CIcon width={24} name="cil-check" />
                             </CWidgetIcon>
@@ -479,12 +562,14 @@ const UserProfile = () => {
                     <CCardBody>
                       <CRow>
                         <CCol>
+                        <CFade in={showSaveComm} unmountOnExit={true}>
                           <CWidgetIcon text="Endorsed By Bryan and 10 others" header="Communication" color="info" iconPadding={false}>
                             <CIcon width={24} name="cil-check" />
                           </CWidgetIcon>
+                          </CFade> 
                         </CCol>
                         <CCol>
-                          <CFade in={showCard} unmountOnExit={true}>
+                          <CFade in={showSaveLeadership} unmountOnExit={true}>
                             <CWidgetIcon text="Endorsed By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}>
                               <CIcon width={24} name="cil-check" />
                             </CWidgetIcon>
@@ -508,14 +593,18 @@ const UserProfile = () => {
                     <CCardBody>
                       <CRow>
                         <CCol>
+                        <CFade in={showSaveHiphop} unmountOnExit={true}>
                           <CWidgetIcon header="Hip-hop" color="info" iconPadding={false}>
                             <CIcon width={24} name="cil-check" />
                           </CWidgetIcon>
+                          </CFade>
                         </CCol>
                         <CCol>
+                        <CFade in={showSavePiano} unmountOnExit={true}>
                           <CWidgetIcon header="Piano" color="info" iconPadding={false}>
                             <CIcon width={24} name="cil-check" />
                           </CWidgetIcon>
+                          </CFade> 
                         </CCol>
                       </CRow>
                     </CCardBody>
@@ -539,10 +628,11 @@ const UserProfile = () => {
                     <h5>Tools and Technologies</h5>
                     <CRow>
                       <CCol>
+                      <CFade in={showJava} unmountOnExit={true}>
                         <CWidgetIcon text="Endorsed By Ruichun and 10 others" header="Java" color="info" iconPadding={false}
                           footerSlot={
                             <CCardFooter className="card-footer px-3 py-2">
-                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateJava}>
                                 Delete
                               </CButton>
                               <CIcon name="cil-trash" className="float-right" width="25" />
@@ -551,13 +641,14 @@ const UserProfile = () => {
                         >
                           <CIcon width={24} name="cil-check" className="mx-5" />
                         </CWidgetIcon>
+                        </CFade> 
                       </CCol>
                       <CCol>
-                        <CFade in={showTech} unmountOnExit={true}>
+                        <CFade in={showJavaScript} unmountOnExit={true}>
                           <CWidgetIcon text="Endorsed By Shengjing and 10 others" header="JavaScript" color="info" iconPadding={false}
                             footerSlot={
                               <CCardFooter className="card-footer px-3 py-2">
-                                <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateTech}>
+                                <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateJavaScript}>
                                   Delete
                               </CButton>
                                 <CIcon name="cil-trash" className="float-right" width="25" />
@@ -572,7 +663,7 @@ const UserProfile = () => {
                           <CWidgetIcon header="php" color="info" iconPadding={false}
                             footerSlot={
                               <CCardFooter className="card-footer px-3 py-2">
-                                <CButton size="sm" variant="ghost" className="float-left" color="ghost">
+                                <CButton size="sm" variant="ghost" className="float-left" color="ghost" >
                                   Delete
                               </CButton>
                                 <CIcon name="cil-trash" className="float-right" width="25" />
@@ -588,10 +679,11 @@ const UserProfile = () => {
                     <h5>Soft Skills</h5>
                     <CRow>
                       <CCol>
+                      <CFade in={showComm} unmountOnExit={true}>
                         <CWidgetIcon text="Endorsed By Bryan and 10 others" header="Communication" color="info" iconPadding={false}
                           footerSlot={
                             <CCardFooter className="card-footer px-3 py-2">
-                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateComm}>
                                 Delete
                               </CButton>
                               <CIcon name="cil-trash" className="float-right" width="25" />
@@ -600,13 +692,14 @@ const UserProfile = () => {
                         >
                           <CIcon width={24} name="cil-check" className="mx-5" />
                         </CWidgetIcon>
+                        </CFade>
                       </CCol>
                       <CCol>
-                        <CFade in={showCard} unmountOnExit={true}>
+                        <CFade in={showLeadership} unmountOnExit={true}>
                           <CWidgetIcon text="Endorsed By Jingzhan and 10 others" header="Leadership" color="info" iconPadding={false}
                             footerSlot={
                               <CCardFooter className="card-footer px-3 py-2">
-                                <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                                <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateLeadership}>
                                   Delete
                               </CButton>
                                 <CIcon name="cil-trash" className="float-right" width="25" />
@@ -622,10 +715,11 @@ const UserProfile = () => {
                     <h5>Others</h5>
                     <CRow>
                       <CCol>
+                      <CFade in={showHiphop} unmountOnExit={true}>
                         <CWidgetIcon header="Hip-hop" color="info" iconPadding={false}
                           footerSlot={
                             <CCardFooter className="card-footer px-3 py-2">
-                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateHiphop}>
                                 Delete
                               </CButton>
                               <CIcon name="cil-trash" className="float-right" width="25" />
@@ -634,12 +728,14 @@ const UserProfile = () => {
                         >
                           <CIcon width={24} name="cil-check" className="mx-5" />
                         </CWidgetIcon>
+                        </CFade>
                       </CCol>
                       <CCol>
+                      <CFade in={showPiano} unmountOnExit={true}>
                         <CWidgetIcon header="Piano" color="info" iconPadding={false}
                           footerSlot={
                             <CCardFooter className="card-footer px-3 py-2">
-                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updateCard}>
+                              <CButton size="sm" variant="ghost" className="float-left" color="ghost" onClick={updatePiano}>
                                 Delete
                               </CButton>
                               <CIcon name="cil-trash" className="float-right" width="25" />
@@ -648,6 +744,7 @@ const UserProfile = () => {
                         >
                           <CIcon width={24} name="cil-check" className="mx-5" />
                         </CWidgetIcon>
+                        </CFade> 
                       </CCol>
                     </CRow>
 
@@ -701,7 +798,7 @@ const UserProfile = () => {
                   <CButton color="primary" onClick={saveSkills}>
                     Save
                 </CButton>{' '}
-                  <CButton color="secondary" onClick={() => setSkill(!editSkill)}>
+                  <CButton color="secondary" onClick={cancelSkills}>
                     Cancel
                 </CButton>
                 </CModalFooter>
