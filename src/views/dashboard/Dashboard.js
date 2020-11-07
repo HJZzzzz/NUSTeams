@@ -77,8 +77,8 @@ const Dashboard = () => {
   const [projectType, setProjectType] = useState('Module Project');
   const [projectIdentifier, setProjectIdentifier] = useState('');
   const [teamSize, setTeamSize] = useState('');
-  const [skills, setSkills] = useState('');
-  const [deadline, setDeadline] = useState('');
+  const [setSkills] = useState('');
+  const [setDeadline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState(-1);
 
@@ -277,11 +277,23 @@ const Dashboard = () => {
                     'user':
                       (item) => (
                         <td className="text-center">
+                        <a href='/#/user-portfolio'>
                           <div className="c-avatar">
                             <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                             <span className="c-avatar-status bg-danger"></span>
                           </div>
+                          </a>
                         </td>
+                      ),
+                      'name':
+                      (item) => (
+                        
+                          <td className="text-center">
+                          <a href='/#/user-portfolio'>
+                            {item.name}
+                          </a>
+                          </td>
+                        
                       ),
                     'actions':
                       (item) => (
@@ -314,11 +326,23 @@ const Dashboard = () => {
                     'user':
                       (item) => (
                         <td className="text-center">
+                        <a href='/#/user-portfolio'>
                           <div className="c-avatar">
                             <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                             <span className="c-avatar-status bg-danger"></span>
                           </div>
+                          </a>
                         </td>
+                      ),
+                      'name':
+                      (item) => (
+                        
+                          <td className="text-center">
+                          <a href='/#/user-portfolio'>
+                            {item.name}
+                          </a>
+                          </td>
+                        
                       ),
                     'status':
                       (item) => (

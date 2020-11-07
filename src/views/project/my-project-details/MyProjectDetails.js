@@ -1,5 +1,5 @@
-import React, { lazy, Component, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+// import { useHistory } from 'react-router-dom'
 import {
   CBadge,
   CButton,
@@ -62,7 +62,7 @@ const MyProjectDetails = () => {
   const [post, setPost] = useState(false)
   const [postTitle, setPostTitle] = useState(false)
   const [postDescription, setPostDescription] = useState(false)
-  const [postPhoto, setPostPhoto] = useState(false)
+  const [setPostPhoto] = useState(false)
   const [showCard, setShowCard] = useState(false)
 
 
@@ -86,11 +86,11 @@ const MyProjectDetails = () => {
   const [fade] = useState(true)
   const [toastMessage, setToastMessage] = useState('');
 
-  const history = useHistory()
+  // const history = useHistory()
 
-  const pageChange = () => {
-    history.push(`/user-portfolio`)
-  }
+  // const pageChange = () => {
+  //   history.push(`/user-portfolio`)
+  // }
 
   const getBadge = (status) => {
     switch (status) {
@@ -348,6 +348,7 @@ const MyProjectDetails = () => {
                   </CModalHeader>
                   <CModalBody className="text-center">
                     <img
+                      alt="logo"
                       src="avatars/cup.png"
                       style={{
                         width: "30%",
@@ -441,9 +442,9 @@ const MyProjectDetails = () => {
                 <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Module Code:</span>     {projectIdentifier}</p></CListGroupItem>
                 <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Skill Requirement:</span>     {skills}</p></CListGroupItem>
                 <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Vacancy:</span>     {vacancy}</p></CListGroupItem>
-                <CListGroupItem style={{ paddingLeft: "30px", paddingTop: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Status:     </span><CBadge className="mr-1" shape="pill" color={getBadge(status)}><span style={{ color: "white" }}>{status}</span></CBadge></CListGroupItem>
+                <CListGroupItem style={{ paddingLeft: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Status:     </span><CBadge className="mr-1" shape="pill" color={getBadge(status)}><span style={{ color: "white" }}>{status}</span></CBadge></CListGroupItem>
                 <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Application Deadline:</span>     {deadline}</p></CListGroupItem>
-                <CListGroupItem style={{ paddingLeft: "30px", paddingTop: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Description:     </span>{description}</CListGroupItem>
+                <CListGroupItem style={{ paddingLeft: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Description:     </span>{description}</CListGroupItem>
               </CListGroup>
 
             </CCol>
@@ -487,13 +488,15 @@ const MyProjectDetails = () => {
                       <tbody>
                         <tr>
                           <td className="text-center">
+                          <a href='/#/user-portfolio'>
                             <div className="c-avatar">
                               <img src={'avatars/tom.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                               <span className="c-avatar-status bg-secondary"></span>
                             </div>
+                            </a>
                           </td>
                           <td>
-                            <div>Tom Cruise</div>
+                            <div><a href='/#/user-portfolio'>Tom Cruise</a></div>
                             <div className="small text-muted">
                               Updated 1 day ago
                                         </div>
@@ -510,25 +513,27 @@ const MyProjectDetails = () => {
                             4
                                         </td>
                           <td>
-                            <CRow>
+                            {/* <CRow>
                               <CCol>
                                 <CButton block color="info" onClick={pageChange}>View Profile</CButton>
                               </CCol>
-                              <CCol>
+                              <CCol> */}
                                 <CButton block color={buttonColor[2]} disabled={!flag} onClick={() => setFeedback(!feedback)}>Leave Feedback</CButton>
-                              </CCol>
-                            </CRow>
+                              {/* </CCol>
+                            </CRow> */}
                           </td>
                         </tr>
                         <tr>
                           <td className="text-center">
+                          <a href='/#/user-portfolio'>
                             <div className="c-avatar">
                               <img src={'avatars/matt.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                               <span className="c-avatar-status bg-success"></span>
                             </div>
+                            </a>
                           </td>
                           <td>
-                            <div>Matt Damon</div>
+                            <div><a href='/#/user-portfolio'>Matt Damon</a></div>
                             <div className="small text-muted">
                               Updated 1 day ago
                                         </div>
@@ -545,25 +550,27 @@ const MyProjectDetails = () => {
                             3
                                         </td>
                           <td>
-                            <CRow>
+                            {/* <CRow>
                               <CCol>
                                 <CButton block color="info" onClick={pageChange}>View Profile</CButton>
                               </CCol>
-                              <CCol>
+                              <CCol> */}
                                 <CButton block color={buttonColor[2]} disabled={!flag} onClick={() => setFeedback(!feedback)}>Leave Feedback</CButton>
-                              </CCol>
-                            </CRow>
+                              {/* </CCol>
+                            </CRow> */}
                           </td>
                         </tr>
                         <tr>
                           <td className="text-center">
+                          <a href='/#/user-portfolio'>
                             <div className="c-avatar">
                               <img src={'avatars/5.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                               <span className="c-avatar-status bg-secondary"></span>
                             </div>
+                            </a>
                           </td>
                           <td>
-                            <div>Sam Smith</div>
+                            <div><a href='/#/user-portfolio'>Sam Smith</a></div>
                             <div className="small text-muted">
                               Updated 1 day ago
                                         </div>
@@ -580,25 +587,27 @@ const MyProjectDetails = () => {
                             2
                                         </td>
                           <td>
-                            <CRow>
+                            {/* <CRow>
                               <CCol>
                                 <CButton block color="info" onClick={pageChange}>View Profile</CButton>
                               </CCol>
-                              <CCol>
+                              <CCol> */}
                                 <CButton block color={buttonColor[2]} disabled={!flag} onClick={() => setFeedback(!feedback)}>Leave Feedback</CButton>
-                              </CCol>
-                            </CRow>
+                              {/* </CCol>
+                            </CRow> */}
                           </td>
                         </tr>
                         <tr>
                           <td className="text-center">
+                          <a href='/#/user-portfolio'>
                             <div className="c-avatar">
                               <img src={'avatars/8.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                               <span className="c-avatar-status bg-success"></span>
                             </div>
+                            </a>
                           </td>
                           <td>
-                            <div>Christian Bale</div>
+                            <div><a href='/#/user-portfolio'>Christian Bale</a></div>
                             <div className="small text-muted">
                               Updated 1 day ago
                                         </div>
@@ -615,14 +624,14 @@ const MyProjectDetails = () => {
                             4
                                         </td>
                           <td>
-                            <CRow>
+                            {/* <CRow>
                               <CCol>
                                 <CButton block color="info" onClick={pageChange}>View Profile</CButton>
                               </CCol>
-                              <CCol>
+                              <CCol> */}
                                 <CButton block color={buttonColor[2]} disabled={!flag} onClick={() => setFeedback(!feedback)}>Leave Feedback</CButton>
-                              </CCol>
-                            </CRow>
+                              {/* </CCol>
+                            </CRow> */}
                           </td>
                         </tr>
 
@@ -646,17 +655,27 @@ const MyProjectDetails = () => {
                               </div>
                             </td>
                           ),
+                          'name':
+                          (item) => (
+                            
+                              <td className="text-center">
+                              <a href='/#/user-portfolio'>
+                                {item.name}
+                              </a>
+                              </td>
+                            
+                          ),
                         'actions':
                           (item) => (
-                            <td>
+                            <td style={{width:"30%"}}>
                               <CRow>
-                                <CCol sm="12" md="12" l="4" xl="4">
+                                {/* <CCol sm="12" md="12" l="4" xl="4">
                                   <CButton block color="info" onClick={pageChange}>View Profile</CButton>
-                                </CCol>
-                                <CCol sm="12" md="12" l="4" xl="4">
+                                </CCol> */}
+                                <CCol sm="12" md="12" l="8" xl="6">
                                   <CButton block color="success" onClick={() => { acceptRequest(item.id) }}>Accept</CButton>
                                 </CCol>
-                                <CCol sm="12" md="12" l="4" xl="4">
+                                <CCol sm="12" md="12" l="8" xl="6">
                                   <CButton block color="danger" onClick={() => { prepareReject(item.id) }}>Reject</CButton>
                                 </CCol>
                               </CRow>

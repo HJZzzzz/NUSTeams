@@ -9,11 +9,9 @@ import {
   CSidebarNavTitle,
   CSidebarMinimizer,
   CSidebarNavDropdown,
-  CSidebarNavItem,
-  CImg,
+  CSidebarNavItem
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 // sidebar nav config
 import navigation from './_nav'
 
@@ -27,7 +25,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <img src={"avatars/logo.png"}></img>
+        <img alt="logo" src={"avatars/logo.png"}></img>
       </CSidebarBrand>
       <CSidebarNav>
 

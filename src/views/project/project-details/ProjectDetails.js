@@ -1,4 +1,4 @@
-import React, { lazy, Component, useState } from 'react'
+import React, { Component } from 'react'
 import {
   CBadge,
   CButton,
@@ -12,7 +12,7 @@ import {
 } from '@coreui/react'
 
 import {
-  Alert, Progress
+  Alert
 } from "reactstrap";
 
 import CIcon from '@coreui/icons-react'
@@ -31,7 +31,7 @@ class ProjectDetails extends Component {
   }
 
   send_request() {
-    if (this.state.sent == false) {
+    if (this.state.sent === false) {
       this.setState({ sent: true })
       console.log('send')
       // this.setState({
@@ -92,10 +92,10 @@ class ProjectDetails extends Component {
                     id="textarea-input"
                     rows="5"
                     placeholder="Content..."
-                    className={this.state.sent == true ? "disabled" : ""}
+                    className={this.state.sent === true ? "disabled" : ""}
                   />
                   <br />
-                  <CButton block color={this.state.sent == true ? "dark" : "info"} onClick={() => this.send_request()} className={this.state.sent == true ? "disabled" : ""}>
+                  <CButton block color={this.state.sent === true ? "dark" : "info"} onClick={() => this.send_request()} className={this.state.sent === true ? "disabled" : ""}>
                     Request to Join
                           </CButton>
                 </div>
@@ -109,9 +109,9 @@ class ProjectDetails extends Component {
                   <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Module Code:</span>     CS3240</p></CListGroupItem>
                   <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Skill Requirement:</span>     JavaScript, Java, Python</p></CListGroupItem>
                   <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Vacancy:</span>     4/5</p></CListGroupItem>
-                  <CListGroupItem style={{ paddingLeft: "30px", paddingTop: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Status:     </span><CBadge className="mr-1" color="success" shape="pill">OPEN</CBadge></CListGroupItem>
+                  <CListGroupItem style={{ paddingLeft: "30px",  paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Status:     </span><CBadge className="mr-1" color="success" shape="pill">OPEN</CBadge></CListGroupItem>
                   <CListGroupItem><p style={{ margin: "10px" }}><span style={{ color: "gray" }} >Application Deadline:</span>     2020-11-30</p></CListGroupItem>
-                  <CListGroupItem style={{ paddingLeft: "30px", paddingTop: "30px", paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Description:     </span>Hi Guys, this is team DB Master from CS2102, we are currently looking for two more students who are interested in database implementition and web development! Feell free to send your request!</CListGroupItem>
+                  <CListGroupItem style={{ paddingLeft: "30px",  paddingBottom: "20px", paddingTop: "20px" }}><span style={{ color: "gray" }} >Description:     </span>Hi Guys, this is team DB Master from CS2102, we are currently looking for two more students who are interested in database implementition and web development! Feell free to send your request!</CListGroupItem>
                 </CListGroup>
 
               </CCol>
@@ -134,19 +134,20 @@ class ProjectDetails extends Component {
                       <th className="text-center">Faculty</th>
                       <th className="text-center">Major</th>
                       <th className="text-center">Year</th>
-                      <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td className="text-center">
+                      <a href='/#/user-portfolio'>
                         <div className="c-avatar">
                           <img src={'avatars/tom.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                           <span className="c-avatar-status bg-secondary"></span>
                         </div>
+                        </a>
                       </td>
                       <td>
-                        <div>Tom Cruise</div>
+                        <div><a href='/#/user-portfolio'>Tom Cruise</a></div>
                         <div className="small text-muted">
                           Updated 1 day ago
                               </div>
@@ -162,21 +163,19 @@ class ProjectDetails extends Component {
                       <td className="text-center">
                         4
                             </td>
-                      <td>
-                        <CButton block color="info">
-                          View Profile
-                              </CButton>
-                      </td>
                     </tr>
                     <tr>
                       <td className="text-center">
+                      <a href='/#/user-portfolio'>
                         <div className="c-avatar">
                           <img src={'avatars/matt.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                           <span className="c-avatar-status bg-success"></span>
                         </div>
+                        </a>
                       </td>
                       <td>
-                        <div>Matt Damon</div>
+                        <div>
+                        <a href='/#/user-portfolio'>Matt Damon</a></div>
                         <div className="small text-muted">
                           Updated 1 day ago
                               </div>
@@ -192,11 +191,6 @@ class ProjectDetails extends Component {
                       <td className="text-center">
                         3
                             </td>
-                      <td>
-                        <CButton block color="info">
-                          View Profile
-                              </CButton>
-                      </td>
                     </tr>
 
                   </tbody>

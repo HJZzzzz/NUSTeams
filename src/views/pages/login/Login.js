@@ -36,6 +36,7 @@ const Login = () => {
 
   const pageChange = () => {
     history.push(`/dashboard`)
+    // window.location.replace("/dashboard");
   }
 
   const doLogin = () => {
