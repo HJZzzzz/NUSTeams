@@ -40,9 +40,9 @@ import Rating from '@material-ui/lab/Rating';
 import CIcon from '@coreui/icons-react'
 
 let inbox = [
-  { id: 4, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Tom Cruise has invited you to join his project: IS4103 Capstone Project' },
-  { id: 5, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'Matt Damon has invited you to join his project: CS3240 Design Project' },
-  { id: 6, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Sam Smith has invited you to join his project: IS3106 Final Project' },
+  { id: 4, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'Hi! May I join your team? Currently I am Year4 with internship experience.' },
+  { id: 5, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'Hi! Hope to join your team' },
+  // { id: 6, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'Are yall st' },
 ]
 
 
@@ -62,7 +62,7 @@ const MyProjectDetails = () => {
   const [post, setPost] = useState(false)
   const [postTitle, setPostTitle] = useState(false)
   const [postDescription, setPostDescription] = useState(false)
-  const [setPostPhoto] = useState(false)
+  const [postPhoto,setPostPhoto] = useState(false)
   const [showCard, setShowCard] = useState(false)
 
 
@@ -479,7 +479,7 @@ const MyProjectDetails = () => {
                         <tr>
                           <th className="text-center"><CIcon name="cil-people" /></th>
                           <th>User</th>
-                          <th className="text-center">Faculty</th>
+                          <th className="text-center">Rating</th>
                           <th className="text-center">Major</th>
                           <th className="text-center">Year</th>
                           <th className="text-center">Action</th>

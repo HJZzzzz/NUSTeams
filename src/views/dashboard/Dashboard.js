@@ -77,8 +77,8 @@ const Dashboard = () => {
   const [projectType, setProjectType] = useState('Module Project');
   const [projectIdentifier, setProjectIdentifier] = useState('');
   const [teamSize, setTeamSize] = useState('');
-  const [setSkills] = useState('');
-  const [setDeadline] = useState('');
+  const [skills,setSkills] = useState('');
+  const [deadline,setDeadline] = useState('');
   const [description, setDescription] = useState('');
   const [selectedRequestId, setSelectedRequestId] = useState(-1);
 
