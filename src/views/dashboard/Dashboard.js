@@ -50,9 +50,9 @@ let inbox = [
 ]
 
 let outbox = [
-  { id: 1, user: 'avatars/2.jpg', name: 'Tom Cruise', daysAgo: '3', message: 'You requested to join Tom Cruise’s project: IS4444 Engineering Project', status: 'PENDING' },
-  { id: 2, user: 'avatars/3.jpg', name: 'Matt Damon', daysAgo: '3', message: 'You requested to join Matt Damon’s project: IS3333 Design Project', status: 'PENDING' },
-  { id: 3, user: 'avatars/4.jpg', name: 'Sam Smith', daysAgo: '6', message: 'You requested to join Sam Smith’s project: CS2102 Database Project', status: 'SUCCESS' },
+  { id: 1, date: '1/11/2020', daysAgo: '3', message: 'You requested to join Tom Cruise’s project: IS4444 Engineering Project', status: 'PENDING' },
+  { id: 2, date: '1/11/2020', daysAgo: '3', message: 'You requested to join Matt Damon’s project: IS3333 Design Project', status: 'PENDING' },
+  { id: 3, date: '1/11/2020', daysAgo: '6', message: 'You requested to join Sam Smith’s project: CS2102 Database Project', status: 'SUCCESS' },
 ]
 
 const getBadge = status => {
@@ -68,7 +68,7 @@ const getBadge = status => {
 }
 const fields = ['name', 'projectType', 'projectIdentifier', 'vacancy', 'status']
 const inboxFields = ['user', 'name', 'message', 'actions']
-const outboxFields = ['user', 'name', 'message', 'status']
+const outboxFields = ['date', 'message', 'status', 'actions']
 const Dashboard = () => {
   let counter = 4;
   const [createProjectModal, setCreateProjectModal] = useState(false);
@@ -311,15 +311,6 @@ const Dashboard = () => {
                   itemsPerPage={5}
                   pagination
                   scopedSlots={{
-                    'user':
-                      (item) => (
-                        <td className="text-center">
-                          <div className="c-avatar">
-                            <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                            <span className="c-avatar-status bg-danger"></span>
-                          </div>
-                        </td>
-                      ),
                     'status':
                       (item) => (
                         <td>
@@ -327,6 +318,17 @@ const Dashboard = () => {
                             {item.status}
                           </CBadge>
                         </td>
+                      ),
+                    'actions':
+                      (item) => (
+                        <td>
+                          <CRow>
+                            <CCol sm="12" md="12" l="8" xl="8">
+                              <CButton block color="info" onClick={pageChangeProject}>View Project</CButton>
+                            </CCol>
+                          </CRow>
+                        </td>
+
                       )
                   }}
                 />
