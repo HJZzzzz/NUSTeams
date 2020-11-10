@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom'
 import {
   CBadge,
@@ -181,19 +181,19 @@ const ViewAllProject = () => {
     },
   ];
 
-  const [details, setDetails] = useState([]);
+  // const [details, setDetails] = useState([]);
   // const [items, setItems] = useState(projectsData)
 
-  const toggleDetails = (index) => {
-    const position = details.indexOf(index);
-    let newDetails = details.slice();
-    if (position !== -1) {
-      newDetails.splice(position, 1);
-    } else {
-      newDetails = [...details, index];
-    }
-    setDetails(newDetails);
-  };
+  // const toggleDetails = (index) => {
+  //   const position = details.indexOf(index);
+  //   let newDetails = details.slice();
+  //   if (position !== -1) {
+  //     newDetails.splice(position, 1);
+  //   } else {
+  //     newDetails = [...details, index];
+  //   }
+  //   setDetails(newDetails);
+  // };
 
   const fields = [
     { key: "projectdetails", label: "Project Details", _style: { width: "25%" } },

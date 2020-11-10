@@ -1,9 +1,8 @@
 import React from "react";
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import {
   CCardBody,
   CDataTable,
-  CButton,
   CCard,
 } from "@coreui/react";
 
@@ -239,18 +238,18 @@ const ViewUsers = () => {
     { key: "rating", _style: { width: "10%" } },
     { key: "major", _style: { width: "20%" } },
     { key: "year", _style: { width: "15%" } },
-    {
-      key: "action",
-      sorter: false,
-      filter: false,
-    },
+    // {
+    //   key: "action",
+    //   sorter: false,
+    //   filter: false,
+    // },
   ];
 
-  const history = useHistory()
+  // const history = useHistory()
 
-  const pageChange = () => {
-    history.push(`/user-portfolio`)
-  }
+  // const pageChange = () => {
+  //   history.push(`/user-portfolio`)
+  // }
 
   return (
     <CCard>
@@ -268,20 +267,33 @@ const ViewUsers = () => {
           scopedSlots={{
             'pic':
               (item) => (
-                <td className="text-center">
+                <td className="text-center" style={{width:"10%"}}>
                   <div className="c-avatar">
+                  <a href='/#/user-portfolio'>
                     <img src={item.pic} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                     <span className="c-avatar-status bg-danger"></span>
+                  </a>
+                    
                   </div>
                 </td>
               ),
-            'action': (item) => {
-              return (
-                <td className="py-2">
-                  <CButton size="sm" color="info" onClick={pageChange}>VIEW PROFILE</CButton>
-                </td>
-              );
-            },
+              'name':
+              (item) => (
+                
+                  <td className="text-center">
+                  <a href='/#/user-portfolio'>
+                    {item.name}
+                  </a>
+                  </td>
+                
+              ),
+            // 'action': (item) => {
+            //   return (
+            //     // <td className="py-2">
+            //     //   <CButton size="sm" color="info" onClick={pageChange}>VIEW PROFILE</CButton>
+            //     // </td>
+            //   );
+            // },
           }}
         />
       </CCardBody>

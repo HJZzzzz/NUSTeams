@@ -15,6 +15,9 @@ const TheHeaderDropdown = () => {
   const goProfile = () => {
     history.push(`/profile`)
   }
+  const logout = () => {
+    history.push(`/`)
+  }
 
   return (
     <CDropdown
@@ -49,7 +52,7 @@ const TheHeaderDropdown = () => {
           Settings
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem onClick={logout}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
           Log Out
         </CDropdownItem>

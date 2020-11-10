@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react'
+import React, { useState } from 'react'
 import {
   CBadge,
   CButton,
@@ -29,88 +29,100 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-const projectData = [
-  { id: 0, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'NUSTeams', Module_Project: 'CS3240', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' },
-  { id: 1, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'AirportMaster', Module_Project: 'IS4103', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' },
-  { id: 2, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'RoomBnB', Module_Project: 'IS3106', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' }
+// const projectData = [
+//   { id: 0, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'NUSTeams', Module_Project: 'CS3240', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' },
+//   { id: 1, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'AirportMaster', Module_Project: 'IS4103', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' },
+//   { id: 2, img: 'https://banner2.cleanpng.com/20200107/cqe/transparent-management-icon-team-icon-5e143fb74b04b0.8063195515783853353073.jpg', project_name: 'RoomBnB', Module_Project: 'IS3106', registered: '2020-2021 Semester 1', description: 'A covid-19 related blockchain project', status: 'completed' }
 
-]
+// ]
 
-const fields = ['img', 'project_name', 'description', 'Module_Project', 'registered', 'status']
+// const fields = ['img', 'project_name', 'description', 'Module_Project', 'registered', 'status']
 
-const getBadge = status => {
-  switch (status) {
-    case 'completed': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
-    default: return 'primary'
-  }
-}
+// const getBadge = status => {
+//   switch (status) {
+//     case 'completed': return 'success'
+//     case 'Inactive': return 'secondary'
+//     case 'Pending': return 'warning'
+//     case 'Banned': return 'danger'
+//     default: return 'primary'
+//   }
+// }
 const UserPortfolio = () => {
-  const [collapse, setCollapse] = useState(false)
-  const [collapseMulti, setCollapseMulti] = useState([false, false])
+  // const [collapse, setCollapse] = useState(false)
+  // const [collapseMulti, setCollapseMulti] = useState([false, false])
   const [accordion, setAccordion] = useState(1)
 
-  const toggle = (e) => {
-    setCollapse(!collapse)
-    e.preventDefault()
-  }
+  // const toggle = (e) => {
+  //   setCollapse(!collapse)
+  //   e.preventDefault()
+  // }
 
-  const toggleMulti = (type) => {
-    let newCollapse = collapseMulti.slice()
-    switch (type) {
-      case "left":
-        newCollapse[0] = !collapseMulti[0];
-        break;
-      case "right":
-        newCollapse[1] = !collapseMulti[1];
-        break;
-      case "both":
-        newCollapse[0] = !collapseMulti[0];
-        newCollapse[1] = !collapseMulti[1];
-        break;
-      default:
-    }
-    setCollapseMulti(newCollapse)
-  }
+  // const toggleMulti = (type) => {
+  //   let newCollapse = collapseMulti.slice()
+  //   switch (type) {
+  //     case "left":
+  //       newCollapse[0] = !collapseMulti[0];
+  //       break;
+  //     case "right":
+  //       newCollapse[1] = !collapseMulti[1];
+  //       break;
+  //     case "both":
+  //       newCollapse[0] = !collapseMulti[0];
+  //       newCollapse[1] = !collapseMulti[1];
+  //       break;
+  //     default:
+  //   }
+  //   setCollapseMulti(newCollapse)
+  // }
 
-  const toggleFade = () => {
-    setFade(!fade)
-  }
+  // const toggleFade = () => {
+  //   setFade(!fade)
+  // }
 
-  const [primary, setPrimary] = useState(false)
+  // const [primary, setPrimary] = useState(false)
   const [invite, setInvite] = useState(false)
-  const [editSkill, setSkill] = useState(false)
+  // const [editSkill, setSkill] = useState(false)
   const [report, setReport] = useState(false)
 
-  const positions = [
-    'static',
-    'top-left',
-    'top-center',
-    'top-right',
-    'top-full',
-    'bottom-left',
-    'bottom-center',
-    'bottom-right',
-    'bottom-full'
-  ]
+  // const positions = [
+  //   'static',
+  //   'top-left',
+  //   'top-center',
+  //   'top-right',
+  //   'top-full',
+  //   'bottom-left',
+  //   'bottom-center',
+  //   'bottom-right',
+  //   'bottom-full'
+  // ]
 
   const [toasts, setToasts] = useState([
   ])
 
-  const [position, setPosition] = useState('top-right')
-  const [autohide, setAutohide] = useState(true)
-  const [autohideValue, setAutohideValue] = useState(5000)
-  const [java, setJava] = useState(true)
-  const [javaScript, setJavaScript] = useState(true)
-  const [communication, setCommunication] = useState(true)
-  const [leadership, setLeadership] = useState(true)
-  const [hiphop, setHiphop] = useState(true)
-  const [piano, setPiano] = useState(true)
+  // const [position, setPosition] = useState('top-right')
+  // const [autohide, setAutohide] = useState(true)
+  // const [autohideValue, setAutohideValue] = useState(5000)
+  // const [java, setJava] = useState(true)
+  // const [javaScript, setJavaScript] = useState(true)
+  // const [communication, setCommunication] = useState(true)
+  // const [leadership, setLeadership] = useState(true)
+  // const [hiphop, setHiphop] = useState(true)
+  // const [piano, setPiano] = useState(true)
 
-  const [closeButton, setCloseButton] = useState(true)
-  const [fade, setFade] = useState(true)
+  // const [closeButton, setCloseButton] = useState(true)
+  // const [fade, setFade] = useState(true)
+  const [position] = useState('top-right')
+  const [autohide] = useState(true)
+  const [autohideValue] = useState(5000)
+  const [java] = useState(true)
+  const [javaScript] = useState(true)
+  const [communication] = useState(true)
+  const [leadership] = useState(true)
+  const [hiphop] = useState(true)
+  const [piano] = useState(true)
+
+  const [closeButton] = useState(true)
+  const [fade] = useState(true)
 
   const addToast = () => {
     setToasts([
@@ -450,7 +462,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                              <img alt="icon" src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
                             </div>
                             <h5>
                               <strong>
@@ -493,7 +505,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                              <img  alt="icon" src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
                             </div>
                             <h5>
                               <strong>
@@ -536,7 +548,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
+                              <img  alt="icon" src="https://www.t2techgroup.com/wp-content/uploads/2017/06/New-Project-Management-Icon.png"></img>
                             </div>
                             <h5>
                               <strong>
@@ -590,7 +602,7 @@ const UserPortfolio = () => {
                     <div class="education-detail">
                       <div class="education-data">
                         <div class="education-image">
-                          <img src="https://cdn.worldvectorlogo.com/logos/nus.svg"></img>
+                          <img  alt="logo" src="https://cdn.worldvectorlogo.com/logos/nus.svg"></img>
                         </div>
                         <h5>
                           <strong>
@@ -612,7 +624,7 @@ const UserPortfolio = () => {
                     <div class="education-detail">
                       <div class="education-data">
                         <div class="education-image">
-                          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Georgia_Tech_seal.svg/1200px-Georgia_Tech_seal.svg.png"></img>
+                          <img alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Georgia_Tech_seal.svg/1200px-Georgia_Tech_seal.svg.png"></img>
                         </div>
                         <h5>
                           <strong>
@@ -634,7 +646,7 @@ const UserPortfolio = () => {
                     <div class="education-detail">
                       <div class="education-data">
                         <div class="education-image">
-                          <img src="https://rafflesmun.files.wordpress.com/2017/01/copy-of-icon.png"></img>
+                          <img alt="logo" src="https://rafflesmun.files.wordpress.com/2017/01/copy-of-icon.png"></img>
                         </div>
                         <h5>
                           <strong>
@@ -672,7 +684,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://textgod.com/wp-content/uploads/2019/06/louis-roze-trui-pink.jpg"></img>
+                              <img alt="logo" src="https://textgod.com/wp-content/uploads/2019/06/louis-roze-trui-pink.jpg"></img>
                             </div>
                             <h5>
                               <strong>
@@ -700,7 +712,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLpo2kLh0mOYWWqzKaVwIp-FhQkOAkIIDqdg&usqp=CAU"></img>
+                              <img alt="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLpo2kLh0mOYWWqzKaVwIp-FhQkOAkIIDqdg&usqp=CAU"></img>
                             </div>
                             <h5>
                               <strong>
@@ -728,7 +740,7 @@ const UserPortfolio = () => {
                         <div class="experience-detail">
                           <div class="experience-data">
                             <div class="experience-image">
-                              <img src="https://selectedsoundsblog.files.wordpress.com/2015/09/george1.jpg"></img>
+                              <img alt="logo" src="https://selectedsoundsblog.files.wordpress.com/2015/09/george1.jpg"></img>
                             </div>
                             <h5>
                               <strong>

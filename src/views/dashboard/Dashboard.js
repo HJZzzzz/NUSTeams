@@ -277,11 +277,23 @@ const Dashboard = () => {
                     'user':
                       (item) => (
                         <td className="text-center">
-                          <div className="c-avatar">
-                            <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
-                            <span className="c-avatar-status bg-danger"></span>
-                          </div>
+                          <a href='/#/user-portfolio'>
+                            <div className="c-avatar">
+                              <img src={item.user} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                              <span className="c-avatar-status bg-danger"></span>
+                            </div>
+                          </a>
                         </td>
+                      ),
+                    'name':
+                      (item) => (
+
+                        <td className="text-center">
+                          <a href='/#/user-portfolio'>
+                            {item.name}
+                          </a>
+                        </td>
+
                       ),
                     'actions':
                       (item) => (
